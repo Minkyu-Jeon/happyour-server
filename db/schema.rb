@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170528143911) do
+ActiveRecord::Schema.define(version: 20170528144408) do
 
   create_table "franchise_image", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer "franchise_id"
@@ -56,6 +56,23 @@ ActiveRecord::Schema.define(version: 20170528143911) do
     t.index ["franchise_id"], name: "index_menus_on_franchise_id", using: :btree
   end
 
+  create_table "order_histories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+    t.integer "order_id",                 null: false
+    t.integer "evaluation", limit: 1
+    t.text    "eval_text",  limit: 65535
+    t.string  "url"
+    t.index ["order_id"], name: "index_order_histories_on_order_id", using: :btree
+  end
+
+  create_table "orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+    t.integer  "user_id",    null: false
+    t.integer  "menu_id",    null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["menu_id"], name: "index_orders_on_menu_id", using: :btree
+    t.index ["user_id"], name: "index_orders_on_user_id", using: :btree
+  end
+
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.string   "email",                            default: "", null: false
     t.string   "encrypted_password",               default: "", null: false
@@ -83,4 +100,7 @@ ActiveRecord::Schema.define(version: 20170528143911) do
   add_foreign_key "invitations", "users"
   add_foreign_key "menu_images", "menus"
   add_foreign_key "menus", "franchises"
+  add_foreign_key "order_histories", "orders"
+  add_foreign_key "orders", "menus"
+  add_foreign_key "orders", "users"
 end
