@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170528142819) do
+ActiveRecord::Schema.define(version: 20170528143911) do
 
   create_table "franchise_image", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer "franchise_id"
@@ -41,6 +41,21 @@ ActiveRecord::Schema.define(version: 20170528142819) do
     t.index ["user_id"], name: "index_invitations_on_user_id", using: :btree
   end
 
+  create_table "menu_images", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+    t.integer "menu_id", null: false
+    t.string  "url"
+    t.index ["menu_id"], name: "index_menu_images_on_menu_id", using: :btree
+  end
+
+  create_table "menus", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+    t.integer  "franchise_id", null: false
+    t.string   "name",         null: false
+    t.integer  "price"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["franchise_id"], name: "index_menus_on_franchise_id", using: :btree
+  end
+
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.string   "email",                            default: "", null: false
     t.string   "encrypted_password",               default: "", null: false
@@ -66,4 +81,6 @@ ActiveRecord::Schema.define(version: 20170528142819) do
 
   add_foreign_key "franchise_image", "franchises"
   add_foreign_key "invitations", "users"
+  add_foreign_key "menu_images", "menus"
+  add_foreign_key "menus", "franchises"
 end
