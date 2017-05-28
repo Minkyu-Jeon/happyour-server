@@ -10,7 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170528141349) do
+ActiveRecord::Schema.define(version: 20170528142819) do
+
+  create_table "franchise_image", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+    t.integer "franchise_id"
+    t.string  "url"
+    t.index ["franchise_id"], name: "index_franchise_image_on_franchise_id", using: :btree
+  end
+
+  create_table "franchises", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+    t.string   "name",                     null: false
+    t.string   "address",     limit: 1000, null: false
+    t.string   "description", limit: 1000
+    t.string   "code",        limit: 10
+    t.string   "open_time",   limit: 8
+    t.string   "close_time",  limit: 8
+    t.string   "gps"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.index ["code"], name: "index_franchises_on_code", using: :btree
+  end
 
   create_table "invitations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer  "user_id",         null: false
@@ -45,5 +64,6 @@ ActiveRecord::Schema.define(version: 20170528141349) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "franchise_image", "franchises"
   add_foreign_key "invitations", "users"
 end
