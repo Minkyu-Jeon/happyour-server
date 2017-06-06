@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170606142501) do
+ActiveRecord::Schema.define(version: 20170606144423) do
 
   create_table "franchise_image", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer "franchise_id"
@@ -96,6 +96,7 @@ ActiveRecord::Schema.define(version: 20170606142501) do
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["recommendation_code"], name: "index_users_on_recommendation_code", using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+    t.index ["user_token"], name: "index_users_on_user_token", using: :btree
   end
 
   add_foreign_key "franchise_image", "franchises"
