@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170528144408) do
+ActiveRecord::Schema.define(version: 20170606142501) do
 
   create_table "franchise_image", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
     t.integer "franchise_id"
@@ -90,6 +90,8 @@ ActiveRecord::Schema.define(version: 20170528144408) do
     t.integer  "social_type",            limit: 1
     t.datetime "created_at",                                    null: false
     t.datetime "updated_at",                                    null: false
+    t.string   "user_token"
+    t.string   "user_secret"
     t.index ["email", "social_type"], name: "index_users_on_email_and_social_type", using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["recommendation_code"], name: "index_users_on_recommendation_code", using: :btree
