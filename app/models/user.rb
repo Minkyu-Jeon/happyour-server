@@ -11,6 +11,11 @@ class User < ApplicationRecord
 
   before_create :gen_recommendation_code
 
+  def set_user_default_auth_info
+    gen_user_token
+    gen_user_secret
+  end
+
   private
   def gen_recommendation_code
   	loop do
@@ -18,5 +23,21 @@ class User < ApplicationRecord
   		self.recommendation_code = code
   		break if User.find_by(recommendation_code: code).nil?
   	end
+  end
+
+  def gen_user_token
+    loop do
+      code = SecureRandom.hex(128)
+      self.user_token = code
+      break if User.find_by(user_token: code).nil?
+    end
+  end
+
+  def gen_user_secret
+    loop do
+      code = SecureRandom.hex(128)
+      self.user_secret = code
+      break if User.find_by(user_secret: code).nil?
+    end
   end
 end
