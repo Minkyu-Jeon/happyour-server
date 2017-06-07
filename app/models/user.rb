@@ -1,6 +1,4 @@
 class User < ApplicationRecord
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :lockable
-
   has_many :invitations, inverse_of: :user
   has_many :orders, inverse_of: :user
 
@@ -11,9 +9,13 @@ class User < ApplicationRecord
 
   before_create :gen_recommendation_code
 
-  def set_user_default_auth_info
-    gen_user_token
-    gen_user_secret
+  def set_auth_data
+    begin
+      self.user_token = SecureRandom.hex
+    end while self.class.unscoped.exists?(user_token: user_token)
+    begin
+      self.user_secret = SecureRandom.hex
+    end while self.class.unscoped.exists?(user_secret: user_secret)
   end
 
   private
@@ -23,21 +25,5 @@ class User < ApplicationRecord
   		self.recommendation_code = code
   		break if User.find_by(recommendation_code: code).nil?
   	end
-  end
-
-  def gen_user_token
-    loop do
-      code = SecureRandom.hex(128)
-      self.user_token = code
-      break if User.find_by(user_token: code).nil?
-    end
-  end
-
-  def gen_user_secret
-    loop do
-      code = SecureRandom.hex(128)
-      self.user_secret = code
-      break if User.find_by(user_secret: code).nil?
-    end
   end
 end
