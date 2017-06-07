@@ -5,16 +5,13 @@ gem 'mysql2', '0.3.18'
 gem 'puma', '3.7'
 
 group :assets do
-  gem 'sass-rails', '~> 5.0'  
+  gem 'sass-rails', '~> 5.0'
   gem 'uglifier', '>= 1.3.0'
   gem 'coffee-rails', '~> 4.2'
 end
 
 # For File Upload
 gem 'carrierwave'
-
-# For User Authentication
-gem 'devise', '4.1.0'
 
 gem 'active_model_serializers'
 
