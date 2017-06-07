@@ -1,16 +1,18 @@
-class V1::UsersController < ApiController
+class V1::UsersController < ::ApiController
 	skip_before_action :authenticate_user_token!
 
 	def create
-		require_params! :email, :nickname, :password, :social_type
+		require_params! :email, :nickname, :password
 
 		user = User.find_or_initialize_by(email: params[:email])
 
-		user.persisted? and raise ApplicationError.new(:conflict)
+		user.persisted? and raise ServiceError.new("이메일 중복", :conflict)
 
 		user.set_auth_data
 
-		user.save(user_params) or raise FailToSaveError.new(user)
+		user.attributes = user_params
+
+		user.save or raise FailToSaveError.new(user)
 
 		render json: user
 	end
