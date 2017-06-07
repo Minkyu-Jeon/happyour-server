@@ -8,7 +8,7 @@ class V1::UsersController < ApiController
 
 		user.persisted? and raise ApplicationError.new(:conflict)
 
-		user.set_user_default_auth_info
+		user.set_auth_data
 
 		user.save(user_params) or raise FailToSaveError.new(user)
 
@@ -26,7 +26,7 @@ class V1::UsersController < ApiController
 	def social_login
 		head :ok
 	end
-	
+
 	private
 	def user_params
 		params.permit(:email, :nickname, :password, :social_type)
