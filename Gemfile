@@ -2,13 +2,17 @@ source 'https://rubygems.org'
 
 gem 'rails', '5.0.1'
 gem 'mysql2', '0.3.18'
-gem 'puma', '3.7'
 
 group :assets do
   gem 'sass-rails', '~> 5.0'
   gem 'uglifier', '>= 1.3.0'
   gem 'coffee-rails', '~> 4.2'
 end
+
+gem "bcrypt"
+
+# http client
+gem "faraday"
 
 # For File Upload
 gem 'carrierwave'
@@ -30,6 +34,10 @@ group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
+end
+
+group :production do
+  gem 'puma', '3.7'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
