@@ -22,7 +22,15 @@ class V1::UsersController < ::ApiController
 	end
 
 	def login
-		head :ok
+		require_params! :email, :password
+
+		user = User.find_by!(email: params.delete(:email))
+
+		user.authenticate(params.delete(:password)) or raise ServiceError.new("비밀번호 오류", :unauthorized)
+
+		user.set_auth_data
+
+		render json: user
 	end
 
 	def social_login
