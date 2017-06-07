@@ -18,7 +18,9 @@ class V1::UsersController < ::ApiController
 	end
 
 	def social_signup
-		head :ok
+		result = SignupForSocial.new(social_params).call
+
+		head result.data
 	end
 
 	def login
@@ -39,6 +41,10 @@ class V1::UsersController < ::ApiController
 
 	private
 	def user_params
-		params.permit(:email, :nickname, :password, :social_type)
+		params.permit(:email, :nickname, :password, :social_type, :phone_number)
+	end
+
+	def social_params
+		params.permit(:nickname, :social_type, :access_token, :phone_number)
 	end
 end
