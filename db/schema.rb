@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170607085221) do
+ActiveRecord::Schema.define(version: 20170704105637) do
 
   create_table "franchise_image", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "franchise_id"
@@ -73,6 +73,18 @@ ActiveRecord::Schema.define(version: 20170607085221) do
     t.index ["user_id"], name: "index_orders_on_user_id", using: :btree
   end
 
+  create_table "user_devices", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "user_id",      null: false
+    t.string   "os_type"
+    t.string   "device_id"
+    t.string   "push_token"
+    t.string   "access_token", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["access_token"], name: "index_user_devices_on_access_token", using: :btree
+    t.index ["user_id"], name: "index_user_devices_on_user_id", using: :btree
+  end
+
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "email",                          default: "", null: false
     t.string   "nickname"
@@ -98,4 +110,5 @@ ActiveRecord::Schema.define(version: 20170607085221) do
   add_foreign_key "order_histories", "orders"
   add_foreign_key "orders", "menus"
   add_foreign_key "orders", "users"
+  add_foreign_key "user_devices", "users"
 end
