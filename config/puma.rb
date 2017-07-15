@@ -10,7 +10,7 @@ threads threads_count, threads_count
 # Specifies the `port` that Puma will listen on to receive requests; default is 3000.
 #
 port        ENV.fetch("PORT") { 3000 }
-app_path = "/home/vagrant/synced_folder/happyour"
+app_path = Rails.root
 
 # Specifies the `environment` that Puma will run in.
 #
