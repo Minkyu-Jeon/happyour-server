@@ -7,5 +7,17 @@ Rails.application.routes.draw do
   	# 로그인
   	post 'login' => 'users#login'
   	post 'social_login' => 'users#social_login'
+
+    # 가맹점
+    get 'franchises' => 'franchises#index' # 가맹점 목록
+    get 'franchises/:id' => 'franchises#show' # 가맹점 상세보기
+
+    # 메뉴
+    get 'menus/:id' => 'menus#show' # 메뉴 상세보기
+
+    # 주문
+    post 'orders' => 'orders#index' # 주문하기
+    put 'orders/id' => 'orders#update' # 수령하기
+    post 'order_histories' => 'order_histories#create' # 평가하기
   end
 end
