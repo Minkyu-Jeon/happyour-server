@@ -27,6 +27,15 @@ begin
       s.save!
     end
   end
+
+  ActiveRecord::Base.transaction do
+    Store.all.each do |s|
+      s.menus.create!({
+        name: Faker::Name.name,
+        price: Faker::Number.number(5).to_i.round(-4)
+      })
+    end
+  end
 rescue Exception => e
   Rails.logger.info e.message
 end

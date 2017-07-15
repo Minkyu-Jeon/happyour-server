@@ -13,5 +13,8 @@ class V1::StoresController < ::ApiController
   end
 
   def show
+    store = Store.find(params[:id])
+
+    render json: store, serializer: StoreMenuSerializer, include: ["menus.menu_images"]
   end
 end
