@@ -28,7 +28,21 @@ class V1::UsersController < ::ApiController
 
 		user.authenticate(params.delete(:password)) or raise ServiceError.new("비밀번호 오류", :unauthorized)
 
-		render json: user
+		user_device = user.user_devices.last
+
+		if user_device.nil?
+
+			device_attrs = happyout_header.slice(:os_type, :device_id).merge({
+				push_token: params[:push_token],
+				access_token: UserDevice.access_token
+			})
+
+			device = user.user_devices.build(device_attrs)
+
+			device.save!
+		end
+
+		render json: device, serializer: LoginSerializer
 	end
 
 	def social_login
