@@ -10,26 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170715050848) do
-
-  create_table "franchise_image", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "franchise_id"
-    t.string  "url"
-    t.index ["franchise_id"], name: "index_franchise_image_on_franchise_id", using: :btree
-  end
-
-  create_table "franchises", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "name",                     null: false
-    t.string   "address",     limit: 1000, null: false
-    t.string   "description", limit: 1000
-    t.string   "code",        limit: 10
-    t.string   "open_time",   limit: 8
-    t.string   "close_time",  limit: 8
-    t.string   "gps"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-    t.index ["code"], name: "index_franchises_on_code", using: :btree
-  end
+ActiveRecord::Schema.define(version: 20170715055734) do
 
   create_table "invitations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id",         null: false
@@ -48,12 +29,12 @@ ActiveRecord::Schema.define(version: 20170715050848) do
   end
 
   create_table "menus", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "franchise_id", null: false
-    t.string   "name",         null: false
+    t.integer  "store_id",   null: false
+    t.string   "name",       null: false
     t.integer  "price"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.index ["franchise_id"], name: "index_menus_on_franchise_id", using: :btree
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["store_id"], name: "index_menus_on_store_id", using: :btree
   end
 
   create_table "order_histories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -74,6 +55,25 @@ ActiveRecord::Schema.define(version: 20170715050848) do
     t.index ["menu_id"], name: "index_orders_on_menu_id", using: :btree
     t.index ["user_id", "is_receive"], name: "index_orders_on_user_id_and_is_receive", using: :btree
     t.index ["user_id"], name: "index_orders_on_user_id", using: :btree
+  end
+
+  create_table "store_images", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "store_id"
+    t.string  "url"
+    t.index ["store_id"], name: "index_store_images_on_store_id", using: :btree
+  end
+
+  create_table "stores", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "name",                     null: false
+    t.string   "address",     limit: 1000, null: false
+    t.string   "description", limit: 1000
+    t.string   "code",        limit: 10
+    t.string   "open_time",   limit: 8
+    t.string   "close_time",  limit: 8
+    t.string   "gps"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.index ["code"], name: "index_stores_on_code", using: :btree
   end
 
   create_table "user_devices", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -103,12 +103,12 @@ ActiveRecord::Schema.define(version: 20170715050848) do
     t.index ["recommendation_code"], name: "index_users_on_recommendation_code", using: :btree
   end
 
-  add_foreign_key "franchise_image", "franchises"
   add_foreign_key "invitations", "users"
   add_foreign_key "menu_images", "menus"
-  add_foreign_key "menus", "franchises"
+  add_foreign_key "menus", "stores"
   add_foreign_key "order_histories", "orders"
   add_foreign_key "orders", "menus"
   add_foreign_key "orders", "users"
+  add_foreign_key "store_images", "stores"
   add_foreign_key "user_devices", "users"
 end

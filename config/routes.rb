@@ -9,8 +9,8 @@ Rails.application.routes.draw do
   	post 'social_login' => 'users#social_login'
 
     # 가맹점
-    get 'franchises' => 'franchises#index' # 가맹점 목록
-    get 'franchises/:id' => 'franchises#show' # 가맹점 상세보기
+    get 'stores' => 'stores#index' # 가맹점 목록
+    get 'stores/:id' => 'stores#show' # 가맹점 상세보기
 
     # 메뉴
     get 'menus/:id' => 'menus#show' # 메뉴 상세보기

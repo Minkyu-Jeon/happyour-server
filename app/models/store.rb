@@ -1,6 +1,6 @@
-class Franchise < ApplicationRecord
-	has_many :franchise_images, inverse_of: :franchise
-	has_many :menus, inverse_of: :franchise
+class Store < ApplicationRecord
+	has_many :store_images, inverse_of: :store
+	has_many :menus, inverse_of: :store
 
 	validates :name, :address, presence: true
 	validates :oepn_time, :close_time, length: { maximum: 8 }
