@@ -37,12 +37,14 @@ class V1::UsersController < ::ApiController
 				access_token: UserDevice.access_token
 			})
 
-			device = user.user_devices.build(device_attrs)
+			user_device = user.user_devices.build(device_attrs)
 
-			device.save!
+			user_device.save!
+		else
+			user_device.update!(access_token: UserDevice.access_token)
 		end
 
-		render json: device, serializer: LoginSerializer
+		render json: user_device, serializer: LoginSerializer
 	end
 
 	def social_login
@@ -51,7 +53,7 @@ class V1::UsersController < ::ApiController
 
 	private
 	def user_params
-		params.permit(:email, :nickname, :password, :social_type, :phone_number)
+		params.permit(:email, :nickname, :password, :phone_number)
 	end
 
 	def social_params
