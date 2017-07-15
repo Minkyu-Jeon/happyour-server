@@ -1,4 +1,4 @@
-class OrdersController < ::ApiController
+class V1::OrdersController < ::ApiController
   def create
 
   end

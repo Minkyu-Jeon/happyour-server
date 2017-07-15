@@ -23,6 +23,7 @@ class ApiController < ApplicationController
 	end
 
 	def authenticate_user_token!
+		authenticate_user_token
 		raise UnauthorizedError.new if current_user.blank?
 	end
 

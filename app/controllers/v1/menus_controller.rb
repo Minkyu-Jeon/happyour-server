@@ -1,4 +1,4 @@
-class MenusController < ::ApiController
+class V1::MenusController < ::ApiController
   def show
 
   end
