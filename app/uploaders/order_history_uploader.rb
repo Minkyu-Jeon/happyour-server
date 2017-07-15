@@ -1,0 +1,2 @@
+class OrderHistoryUploader < ApplicationUploader
+end
