@@ -16,8 +16,6 @@ class SignupForSocial
 
     user.persisted? and raise ServiceError.new("이메일 중복", :conflict)
 
-    user.set_auth_data
-
     user.attributes = attrs
 
     user.save or raise FailToSaveError.new(user)

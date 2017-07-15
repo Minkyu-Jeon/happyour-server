@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_many :invitations, inverse_of: :user
   has_many :orders, inverse_of: :user
+  has_many :user_devices, inverse_of: :user
 
   validates :email, presence: true, uniqueness: true
   validates :nickname, presence: true
@@ -10,15 +11,6 @@ class User < ApplicationRecord
   has_secure_password
 
   before_create :gen_recommendation_code
-
-  def set_auth_data
-    begin
-      self.user_token = SecureRandom.hex
-    end while self.class.unscoped.exists?(user_token: user_token)
-    begin
-      self.user_secret = SecureRandom.hex
-    end while self.class.unscoped.exists?(user_secret: user_secret)
-  end
 
   private
   def gen_recommendation_code

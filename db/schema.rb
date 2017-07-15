@@ -86,21 +86,18 @@ ActiveRecord::Schema.define(version: 20170704105637) do
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "email",                          default: "", null: false
+    t.string   "email",                          null: false
     t.string   "nickname"
     t.string   "recommendation_code"
     t.integer  "social_type",         limit: 1
-    t.datetime "created_at",                                  null: false
-    t.datetime "updated_at",                                  null: false
-    t.string   "user_token"
-    t.string   "user_secret"
-    t.string   "password_digest",                default: "", null: false
+    t.string   "password_digest",                null: false
     t.string   "phone_number",        limit: 15
-    t.index ["email", "social_type"], name: "index_users_on_email_and_social_type", using: :btree
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["nickname"], name: "index_users_on_nickname", using: :btree
+    t.index ["phone_number"], name: "index_users_on_phone_number", using: :btree
     t.index ["recommendation_code"], name: "index_users_on_recommendation_code", using: :btree
-    t.index ["user_secret"], name: "index_users_on_user_secret", using: :btree
-    t.index ["user_token"], name: "index_users_on_user_token", using: :btree
   end
 
   add_foreign_key "franchise_image", "franchises"

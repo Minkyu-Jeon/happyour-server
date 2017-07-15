@@ -10,13 +10,13 @@ threads threads_count, threads_count
 # Specifies the `port` that Puma will listen on to receive requests; default is 3000.
 #
 port        ENV.fetch("PORT") { 3000 }
-app_path = "/home/vagrant/synced_folder/oneshot"
+app_path = "/home/vagrant/synced_folder/happyour"
 
 # Specifies the `environment` that Puma will run in.
 #
 environment ENV.fetch("RAILS_ENV") { "development" }
 
-bind 'unix:/tmp/oneshot.sock'
+bind 'unix:/tmp/happyour.sock'
 stdout_redirect "#{app_path}/log/puma.stdout.log", "#{app_path}/log/puma.stderr.log", true
 
 # Specifies the number of `workers` to boot in clustered mode.

@@ -2,7 +2,7 @@ class ApiController < ApplicationController
 	before_action :authenticate_user_token!
 	rescue_from StandardError, with: :handle_error
 
-	attr_reader :current_user
+	attr_reader :current_user, :current_device
 
 	protected
 	def require_params!(*args)
@@ -13,14 +13,23 @@ class ApiController < ApplicationController
 		end
 	end
 
+	def happyout_header
+		@happyout_header || = {
+			os_type: request.headers["X-Happyour-OS-Type"],
+			os_version: request.headers["X-Happyour-OS-Version"],
+			version: request.headers["X-Happyour-Version"],
+			device_id: request.headers["X-Happyour-Device-Id"]
+		}.freeze
+	end
+
 	def authenticate_user_token!
-		authenticate_user_token
-		raise ServiceError.new("사용자 인증 실패", :unauthorized) unless current_user.present?
+		raise UnauthorizedError.new if current_user.blank?
 	end
 
 	def authenticate_user_token
 		authenticate_or_request_with_http_token do |token, option|
-			@current_user = User.find_by_user_token(token)
+			@current_device = UserDevice.find_by_access_token(token)
+			@current_user = current_device.try(:user)
 		end
 	end
 
@@ -32,6 +41,8 @@ class ApiController < ApplicationController
 		log_error(e)
 
 		case e
+		when UnauthorizedError
+			head :unauthorized
 		when FailToSaveError
 			if e.record.errors.present?
 				head :bad_request
