@@ -16,7 +16,7 @@ Rails.application.routes.draw do
     get 'menus/:id' => 'menus#show' # 메뉴 상세보기
 
     # 주문
-    post 'orders' => 'orders#index' # 주문하기
+    post 'orders' => 'orders#create' # 주문하기
     put 'orders/id' => 'orders#update' # 수령하기
     post 'order_histories' => 'order_histories#create' # 평가하기
   end
