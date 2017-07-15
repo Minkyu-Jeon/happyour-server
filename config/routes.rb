@@ -17,7 +17,7 @@ Rails.application.routes.draw do
 
     # 주문
     post 'orders' => 'orders#create' # 주문하기
-    put 'orders/id' => 'orders#update' # 수령하기
+    put 'orders/:id' => 'orders#update' # 수령하기
     post 'order_histories' => 'order_histories#create' # 평가하기
   end
 end
