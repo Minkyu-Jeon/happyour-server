@@ -2,6 +2,7 @@ class User < ApplicationRecord
   has_many :invitations, inverse_of: :user
   has_many :orders, inverse_of: :user
   has_many :user_devices, inverse_of: :user
+  has_many :vouchers, inverse_of: :user
 
   validates :email, presence: true, uniqueness: true
   validates :nickname, presence: true
