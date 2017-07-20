@@ -13,8 +13,8 @@ class V1::StoresController < ::ApiController
   end
 
   def show
-    store = Store.find(params[:id])
+    store = Store.includes(:happyhours, menus: :menu_images).find(params[:id])
 
-    render json: store, serializer: StoreMenuSerializer, include: ["menus.menu_images"]
+    render json: store, serializer: StoreShowSerializer, include: ["menus.menu_images", "happyhours"]
   end
 end
