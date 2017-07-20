@@ -16,6 +16,16 @@ class Store < ApplicationRecord
     code
   end
 
+  def is_available_time?(t)
+    wday = t.wday # 오늘 요일
+    c_time_formatted = t.strftime("%T") # 현재 시간
+
+    h = happyhours.where(day_of_week: wday, is_holiday: false)
+    usable_hour = h.where("start_time <= :time AND end_time >= :time", {time: c_time_formatted}).order(end_time: :desc)
+
+    usable_hour.exists?
+  end
+
   private
   def set_gps
     self.gps = Addr2Coord.new(address).call

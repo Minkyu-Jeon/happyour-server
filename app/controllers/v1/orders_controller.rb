@@ -5,6 +5,10 @@ class V1::OrdersController < ::ApiController
     ActiveRecord::Base.transaction do
       menu = Menu.find(params[:menu_id])
 
+      c_time = Time.current
+      is_usable = menu.store.is_available_time?(c_time)
+      raise ServiceError.new("현재는 Happyhour가 아닙니다.", :forbidden) unless is_usable
+
       order = Order.new({
         menu_id: menu.id,
         user_id: current_user.id
@@ -21,7 +25,11 @@ class V1::OrdersController < ::ApiController
   def update
     require_params! :is_receive
 
-    order = Order.find(params[:id])
+    order = Order.includes(menu: :store).find(params[:id])
+
+    c_time = Time.current
+    is_usable = order.menu.store.is_available_time?(c_time)
+    raise ServiceError.new("현재는 Happyhour가 아닙니다.", :forbidden) unless is_usable
 
     raise ServiceError.new("만료된 주문건입니다.", :forbidden) if order.is_expired?
 

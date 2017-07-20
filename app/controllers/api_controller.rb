@@ -56,6 +56,8 @@ class ApiController < ApplicationController
 			head :bad_request
 		when ActiveRecord::RecordNotFound
 			head :not_found
+		else
+			head :internal_server_error
 		end
 	end
 end
