@@ -13,6 +13,7 @@ class User < ApplicationRecord
 
   before_create :gen_recommendation_code
 
+
   private
   def gen_recommendation_code
   	loop do

@@ -5,6 +5,11 @@ class Happyhour < ApplicationRecord
 
   before_save :clear_time, if: :is_holiday
 
+
+  def time_range
+    TimeRange.new(start_time, end_time)
+  end
+
   private
   def clear_time
     self.start_time = nil
