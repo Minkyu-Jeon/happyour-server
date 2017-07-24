@@ -1,9 +1,8 @@
 class SignupForSocial
-  attr_reader :social_email, :attrs
+  attr_reader :user, :attrs
 
   def initialize(attrs)
-    @attrs = attrs
-    @social_email = case attrs[:social_type]
+    @user = case attrs[:social_type]
     when 1 # 페이스북
       AuthenticationForFacebook.new(attrs.delete(:access_token)).call # email
     when 2 # 네이버
@@ -12,14 +11,20 @@ class SignupForSocial
   end
 
   def call
-    user = User.find_or_initialize_by(email: social_email)
+    ActiveRecord::Base.transaction do
+      rec_code = attrs.delete(:recommendation_code)
 
-    user.persisted? and raise ServiceError.new("이메일 중복", :conflict)
+      user or raise ServiceError.new("사용자 정보를 받아올 수 없음", :forbidden)
 
-    user.attributes = attrs
+      user.persisted? and raise ServiceError.new("이메일 중복", :conflict)
 
-    user.save or raise FailToSaveError.new(user)
+      user.attributes = attrs
 
-    user
+      user.save or raise FailToSaveError.new(user)
+
+      InvitationUser.new(rec_code).call(user) if rec_code.present?
+
+      user
+    end
   end
 end

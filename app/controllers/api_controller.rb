@@ -52,7 +52,7 @@ class ApiController < ApplicationController
 			end
 		when ServiceError
 			head e.code
-		when BlankParameterError, ActionController::ParameterMissing
+		when BlankParameterError, ActionController::ParameterMissing, SocialProfileError
 			head :bad_request
 		when ActiveRecord::RecordNotFound
 			head :not_found

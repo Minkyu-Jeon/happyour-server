@@ -1,0 +1,2 @@
+class SocialProfileError < ApplicationError
+end

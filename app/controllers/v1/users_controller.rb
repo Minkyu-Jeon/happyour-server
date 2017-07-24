@@ -1,32 +1,18 @@
 class V1::UsersController < ::ApiController
 	skip_before_action :authenticate_user_token!
 
-	def create
-		require_params! :email, :nickname, :password
-
-		user = User.find_or_initialize_by(email: params[:email])
-
-		user.persisted? and raise ServiceError.new("이메일 중복", :conflict)
-
-		user.attributes = user_params
-
-		user.save or raise FailToSaveError.new(user)
-
-		render json: user
-	end
-
 	def social_signup
 		result = SignupForSocial.new(social_params).call
 
 		head result.data
 	end
 
-	def login
-		require_params! :email, :password
+	def social_login
+		require_params! :social_type, :access_token
 
-		user = User.find_by!(email: params.delete(:email))
+		user = SigninForSocial.new.call(params[:social_type], params[:access_token])
 
-		user.authenticate(params.delete(:password)) or raise ServiceError.new("비밀번호 오류", :unauthorized)
+		user.present? or raise ServiceError.new("가입된 이메일이 없습니다.", :not_found)
 
 		user_device = user.user_devices.last
 
@@ -47,16 +33,12 @@ class V1::UsersController < ::ApiController
 		render json: user_device, serializer: LoginSerializer
 	end
 
-	def social_login
-		head :ok
-	end
-
 	private
 	def user_params
 		params.permit(:email, :nickname, :password, :phone_number)
 	end
 
 	def social_params
-		params.permit(:nickname, :social_type, :access_token, :phone_number)
+		params.permit(:nickname, :social_type, :access_token, :phone_number, :recommendation_code)
 	end
 end

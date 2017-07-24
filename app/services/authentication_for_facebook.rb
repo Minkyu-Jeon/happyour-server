@@ -1,6 +1,5 @@
 class AuthenticationForFacebook
   def initialize(access_token)
-
   end
 
   def call
