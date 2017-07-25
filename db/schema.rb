@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170725140506) do
+ActiveRecord::Schema.define(version: 20170725140924) do
 
   create_table "happyhours", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "store_id",                              null: false
@@ -135,17 +135,6 @@ ActiveRecord::Schema.define(version: 20170725140506) do
     t.index ["recommendation_code"], name: "index_users_on_recommendation_code", using: :btree
   end
 
-  create_table "vouchers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "user_id",            null: false
-    t.integer  "invitation_user_id"
-    t.datetime "expired_at",         null: false
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-    t.index ["invitation_user_id"], name: "index_vouchers_on_invitation_user_id", using: :btree
-    t.index ["user_id", "expired_at"], name: "index_vouchers_on_user_id_and_expired_at", using: :btree
-    t.index ["user_id"], name: "index_vouchers_on_user_id", using: :btree
-  end
-
   add_foreign_key "happyhours", "stores"
   add_foreign_key "invitations", "users"
   add_foreign_key "menu_images", "menus"
@@ -157,5 +146,4 @@ ActiveRecord::Schema.define(version: 20170725140506) do
   add_foreign_key "subscription_users", "subscriptions"
   add_foreign_key "subscription_users", "users"
   add_foreign_key "user_devices", "users"
-  add_foreign_key "vouchers", "users"
 end

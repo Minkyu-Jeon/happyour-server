@@ -8,15 +8,6 @@ class InvitationUser
     rec_user.present? or return false
 
     rec_user.invitations.create!({email: user.email, invited_user_id: user.id})
-
-    t.integer  "user_id",            null: false
-    t.integer  "invitation_user_id"
-    t.datetime "expired_at",         null: false
-    [user, rec_user].each_with_index do |u, index|
-      expired_at = u.vouchers.order(expired_at: :desc).first.try(:expired_at) || Time.current
-      exp_at = expired_at + 1.month
-      u.vouchers.create({})
-    end
   end
 
   private
