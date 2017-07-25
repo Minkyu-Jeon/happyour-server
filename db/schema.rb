@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170718114921) do
+ActiveRecord::Schema.define(version: 20170725140506) do
 
   create_table "happyhours", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "store_id",                              null: false
@@ -88,6 +88,26 @@ ActiveRecord::Schema.define(version: 20170718114921) do
     t.index ["code"], name: "index_stores_on_code", using: :btree
   end
 
+  create_table "subscription_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "user_id",         null: false
+    t.integer  "subscription_id", null: false
+    t.datetime "expired_at",      null: false
+    t.integer  "invitation_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["expired_at"], name: "index_subscription_users_on_expired_at", using: :btree
+    t.index ["invitation_id"], name: "index_subscription_users_on_invitation_id", using: :btree
+    t.index ["subscription_id"], name: "index_subscription_users_on_subscription_id", using: :btree
+    t.index ["user_id"], name: "index_subscription_users_on_user_id", using: :btree
+  end
+
+  create_table "subscriptions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "title",                null: false
+    t.integer  "type",       limit: 1
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
   create_table "user_devices", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id",      null: false
     t.string   "os_type"
@@ -134,6 +154,8 @@ ActiveRecord::Schema.define(version: 20170718114921) do
   add_foreign_key "orders", "menus"
   add_foreign_key "orders", "users"
   add_foreign_key "store_images", "stores"
+  add_foreign_key "subscription_users", "subscriptions"
+  add_foreign_key "subscription_users", "users"
   add_foreign_key "user_devices", "users"
   add_foreign_key "vouchers", "users"
 end
