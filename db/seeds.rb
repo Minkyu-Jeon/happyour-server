@@ -36,6 +36,14 @@ begin
       })
     end
   end
+
+  ActiveRecord::Base.transaction do
+    # 친구 추가시 제공하는 무료 구독
+    Subscription.create!({
+      title: "친구 초대 무료 구독권",
+      type: 0
+    })
+  end
 rescue Exception => e
   Rails.logger.info e.message
 end
