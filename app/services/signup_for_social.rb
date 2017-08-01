@@ -2,6 +2,7 @@ class SignupForSocial
   attr_reader :user, :attrs
 
   def initialize(attrs)
+    @attrs = attrs
     @user = case attrs[:social_type]
     when 1 # 페이스북
       AuthenticationForFacebook.new(attrs.delete(:access_token)).call # email
