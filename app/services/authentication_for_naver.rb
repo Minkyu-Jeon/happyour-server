@@ -15,15 +15,15 @@ class AuthenticationForNaver
     begin
       if response.status == 200
         resp = JSON.parse(response.body)["response"]
-        user = User.find_by_email resp["email"]
-
+        user = User.find_or_initialize_by(email: resp["email"])
         return user if user.persisted?
-        user.attrs = user_params(resp)
+        user.attributes = user_params(resp)
         user
       else
         false
       end
-    rescue Exception => e
+    rescue => e
+      Rails.logger.info e.message
       raise SocialProfileError, "사용자 정보 요청 혹은 응답 처리 에러"
     end
   end

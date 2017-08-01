@@ -20,6 +20,8 @@ class V1::OrdersController < ::ApiController
 
       render json: order, include: ["menu.menu_images"]
     end
+  rescue ActiveRecord::RecordInvalid => e
+
   end
 
   def update

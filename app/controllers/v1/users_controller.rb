@@ -5,7 +5,7 @@ class V1::UsersController < ::ApiController
 		require_params! :access_token, :social_type, :nickname
 		result = SignupForSocial.new(social_params).call
 
-		head result.data
+		render json: result
 	end
 
 	def social_login

@@ -1,0 +1,6 @@
+ko:
+  activerecord:
+    models:
+      order:
+        attributes:
+          subscription_exp: "이용권 만료 혹은 없음"
