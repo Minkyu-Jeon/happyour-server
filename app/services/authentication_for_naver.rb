@@ -32,7 +32,6 @@ class AuthenticationForNaver
   attr_reader :url, :access_token
   def user_params(resp)
     {
-      nickname: resp["nickname"],
       email: resp["email"],
       password: SecureRandom.hex(16)
     }
