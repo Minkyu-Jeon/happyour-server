@@ -9,7 +9,7 @@ class V1::StoresController < ::ApiController
       data = StoreService.new.around(params[:gps])
     end
 
-    render json: data
+    render json: data, each_serializer: StoreSerializer
   end
 
   def show
