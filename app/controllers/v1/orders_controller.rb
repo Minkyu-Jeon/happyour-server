@@ -21,7 +21,11 @@ class V1::OrdersController < ::ApiController
       render json: order, include: ["menu.menu_images"]
     end
   rescue ActiveRecord::RecordInvalid => e
-
+    if e.record.errors.has_key?(:subscription_exp)
+      head :payment_required
+    else
+      head :bad_request
+    end
   end
 
   def update
