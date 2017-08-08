@@ -19,9 +19,7 @@ class Order < ApplicationRecord
 
   private
   def validate_user_exp_dttm
-
     exp_dttm = (self.user.subscription_exp_dttm || 1.day.ago)
-    Rails.logger.info "@@@@#{Time.current}@@@@@@@@@@@#{exp_dttm}@@@@@@@"
     if Time.current < exp_dttm
       errors.add(:subscription_exp, "이용권 만료 혹은 없음")
     end

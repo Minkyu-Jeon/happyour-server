@@ -3,7 +3,7 @@ class V1::StoresController < ::ApiController
     require_params! :type
 
     case params[:type]
-    when "around_me", "map"
+    when "gps"
       require_params! :gps
 
       data = StoreService.new.around(params[:gps])
@@ -17,6 +17,6 @@ class V1::StoresController < ::ApiController
 
     store = Store.distance_from(params[:gps]).includes(:happyhours, menus: :menu_images).find(params[:id])
 
-    render json: store, serializer: StoreShowSerializer, include: ["menus.menu_images", "happyhours"]
+    render json: store, serializer: StoreShowSerializer, include: ["menus.menu_images", "store_images", "happyhours"]
   end
 end
