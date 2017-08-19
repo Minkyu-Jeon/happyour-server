@@ -52,8 +52,7 @@ class Store < ApplicationRecord
     c_time_formatted = c_time.strftime("%T")
     Store.select_with_args("#{self.table_name}.*, #{select_dist}", {lat1: lat, lng1: lng})
          .joins(join_str)
-         .includes(:happyhours)
-         .references(:happyhours)
+         .joins(:happyhours)
          .where(happyhours: { day_of_week: wday })
   end
 
