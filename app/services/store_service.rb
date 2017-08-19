@@ -1,9 +1,9 @@
 class StoreService
-  def initialize
-
-  end
-
   def around(gps)
     Store.includes(:store_images).distance_from(gps).by_dist
+  end
+
+  def hash_tag(tag_name)
+    Store.joins(:hash_tags).where("hash_tags.tag_name LIKE ?", "%#{tag_name}%")
   end
 end
