@@ -48,13 +48,8 @@ class Store < ApplicationRecord
       ) B ON #{Store.table_name}.id = B.id
     JOIN_STR
 
-    c_time = Time.current
-    wday = c_time.wday
-    c_time_formatted = c_time.strftime("%T")
     Store.select_with_args("#{self.table_name}.*, #{select_dist}", {lat1: lat, lng1: lng})
          .joins(join_str)
-         .joins(:happyhours)
-         .where(happyhours: { day_of_week: wday })
   end
 
   def is_available_time?(t)

@@ -33,8 +33,17 @@ begin
       s.menus.create!({
         name: Faker::Name.name,
         price: Faker::Number.number(5).to_i.round(-4),
-        discount_priceed: 500
+        discounted_price: 500
       })
+
+      7.times.each.with_index do |d|
+        s.happyhours.create!({
+          day_of_week: d,
+          is_holiday: false,
+          start_time: "10:00:00",
+          end_time: "12:00:00"
+        })
+      end
 
       s.hash_tags.create!({
         tag_name: Faker::Name.name

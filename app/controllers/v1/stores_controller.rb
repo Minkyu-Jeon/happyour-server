@@ -17,6 +17,11 @@ class V1::StoresController < ::ApiController
       data = StoreService.new.addr(params[:addr])
     end
 
+    c_time = Time.current
+    wday = c_time.wday
+
+    data = data.joins(:happyhours).where(happyhours: { day_of_week: wday })
+
     render json: data, each_serializer: StoreSerializer
   end
 
@@ -25,6 +30,6 @@ class V1::StoresController < ::ApiController
 
     store = Store.distance_from(params[:gps]).includes(:happyhours, menus: :menu_images).find(params[:id])
 
-    render json: store, serializer: StoreShowSerializer, include: ["*"]
+    render json: store, serializer: StoreShowSerializer, include: ["*", "menus.*"]
   end
 end
