@@ -6,4 +6,8 @@ class StoreService
   def hash_tag(tag_name)
     Store.joins(:hash_tags).where("hash_tags.tag_name LIKE ?", "%#{tag_name}%")
   end
+
+  def addr(addr)
+    Store.where("address LIKE ?", "%#{addr}%")
+  end
 end

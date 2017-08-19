@@ -11,6 +11,10 @@ class V1::StoresController < ::ApiController
       require_params! :tag_name
 
       data = StoreService.new.hash_tag(params[:tag_name])
+    when "addr"
+      require_params! :addr
+
+      data = StoreService.new.addr(params[:addr])
     end
 
     render json: data, each_serializer: StoreSerializer
