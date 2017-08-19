@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170819033853) do
+ActiveRecord::Schema.define(version: 20170819035439) do
 
   create_table "happyhours", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "store_id",                              null: false
@@ -22,6 +22,15 @@ ActiveRecord::Schema.define(version: 20170819033853) do
     t.datetime "updated_at",                            null: false
     t.index ["day_of_week"], name: "index_happyhours_on_day_of_week", using: :btree
     t.index ["store_id"], name: "index_happyhours_on_store_id", using: :btree
+  end
+
+  create_table "hash_tags", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "store_id",   null: false
+    t.string   "tag_name",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["store_id"], name: "index_hash_tags_on_store_id", using: :btree
+    t.index ["tag_name"], name: "index_hash_tags_on_tag_name", using: :btree
   end
 
   create_table "invitations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -140,6 +149,7 @@ ActiveRecord::Schema.define(version: 20170819033853) do
   end
 
   add_foreign_key "happyhours", "stores"
+  add_foreign_key "hash_tags", "stores"
   add_foreign_key "invitations", "users"
   add_foreign_key "menu_images", "menus"
   add_foreign_key "menus", "stores"
