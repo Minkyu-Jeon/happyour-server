@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170819035439) do
+ActiveRecord::Schema.define(version: 20170819051321) do
 
   create_table "happyhours", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "store_id",                              null: false
@@ -59,14 +59,6 @@ ActiveRecord::Schema.define(version: 20170819035439) do
     t.index ["store_id"], name: "index_menus_on_store_id", using: :btree
   end
 
-  create_table "order_histories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "order_id",                 null: false
-    t.integer "evaluation", limit: 1
-    t.text    "eval_text",  limit: 65535
-    t.string  "url"
-    t.index ["order_id"], name: "index_order_histories_on_order_id", using: :btree
-  end
-
   create_table "orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id",                    null: false
     t.integer  "menu_id",                    null: false
@@ -77,6 +69,16 @@ ActiveRecord::Schema.define(version: 20170819035439) do
     t.index ["menu_id"], name: "index_orders_on_menu_id", using: :btree
     t.index ["user_id", "is_receive"], name: "index_orders_on_user_id_and_is_receive", using: :btree
     t.index ["user_id"], name: "index_orders_on_user_id", using: :btree
+  end
+
+  create_table "reviews", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "order_id",                 null: false
+    t.integer  "evaluation", limit: 1
+    t.text     "eval_text",  limit: 65535
+    t.string   "url"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.index ["order_id"], name: "index_reviews_on_order_id", using: :btree
   end
 
   create_table "store_images", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -153,9 +155,9 @@ ActiveRecord::Schema.define(version: 20170819035439) do
   add_foreign_key "invitations", "users"
   add_foreign_key "menu_images", "menus"
   add_foreign_key "menus", "stores"
-  add_foreign_key "order_histories", "orders"
   add_foreign_key "orders", "menus"
   add_foreign_key "orders", "users"
+  add_foreign_key "reviews", "orders"
   add_foreign_key "store_images", "stores"
   add_foreign_key "subscription_users", "subscriptions"
   add_foreign_key "subscription_users", "users"

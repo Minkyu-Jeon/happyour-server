@@ -1,0 +1,2 @@
+class ReviewUploader < ApplicationUploader
+end

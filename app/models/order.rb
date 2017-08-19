@@ -2,7 +2,7 @@ class Order < ApplicationRecord
 	belongs_to :user, inverse_of: :orders
 	belongs_to :menu, inverse_of: :orders
 
-	has_one :order_history, inverse_of: :order
+	has_many :reviews, inverse_of: :order
 
   scope :today, -> { where("created_at > ?", Time.current.beginning_of_day) }
 
