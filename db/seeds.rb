@@ -35,6 +35,10 @@ begin
         price: Faker::Number.number(5).to_i.round(-4),
         discount_priceed: 500
       })
+
+      s.hash_tags.create!({
+        tag_name: Faker::Name.name
+      })
     end
   end
 
