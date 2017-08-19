@@ -1,5 +1,5 @@
 class MenuSerializer < ApplicationSerializer
-  attributes :name, :price
+  attributes :name, :price, :discounted_price
 
   belongs_to :store
 

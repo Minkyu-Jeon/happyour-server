@@ -32,7 +32,8 @@ begin
     Store.all.each do |s|
       s.menus.create!({
         name: Faker::Name.name,
-        price: Faker::Number.number(5).to_i.round(-4)
+        price: Faker::Number.number(5).to_i.round(-4),
+        discount_priceed: 500
       })
     end
   end
