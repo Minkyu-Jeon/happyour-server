@@ -9,6 +9,7 @@ group :assets do
   gem 'coffee-rails', '~> 4.2'
 end
 gem 'jquery-rails'
+gem 'bootstrap', '~> 4.0.0.alpha6'
 
 gem "bcrypt"
 
