@@ -1,4 +1,9 @@
 ko:
+  time:
+    formats:
+      default: "%F %T"
+  label:
+    edit: "수정"
   admin:
     base:
       navbar:
@@ -14,6 +19,13 @@ ko:
         title: "식당 목록"
   activerecord:
     models:
-      order:
-        attributes:
-          subscription_exp: "이용권 만료 혹은 없음"
+      store: "식당"
+    attributes:
+      store:
+        name: "식당명"
+        description: "설명"
+        open_time: "영업시작 시간"
+        close_time: "영업종료 시간"
+        address: "주소"
+        created_at: "가맹일시"
+

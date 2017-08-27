@@ -1,3 +1,33 @@
 <% content_for :page_title do %>
 <h1><%= t(".title") %></h1>
 <% end %>
+<table class="table table-striped"> 
+	<thead>
+		<tr>
+			<th><%= Store.human_attribute_name("name") %></th>
+			<th><%= Store.human_attribute_name("description") %></th>
+			<th><%= Store.human_attribute_name("open_time") %></th>
+			<th><%= Store.human_attribute_name("close_time") %></th>
+			<th><%= Store.human_attribute_name("address") %></th>
+			<th><%= Store.human_attribute_name("created_at") %></th>
+			<th><%= t('label.edit') %></th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @stores.each do |s| %>
+		<tr>
+			<td><%= s.name %></td>
+			<td><%= s.description %></td>
+			<td><%= s.open_time %></td>
+			<td><%= s.close_time %></td>
+			<td><%= s.address %></td>
+			<td><%= l(s.created_at) %></td>
+			<td>
+				<%= link_to edit_store_path(s.id) do %>
+					<i class="fa fa-edit"></i>
+				<% end %>
+			</td>
+		</tr>
+		<% end %>
+	</tbody>
+</table>

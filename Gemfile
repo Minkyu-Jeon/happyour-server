@@ -10,6 +10,7 @@ group :assets do
 end
 gem 'jquery-rails'
 gem 'bootstrap', '~> 4.0.0.alpha6'
+gem 'font-awesome-rails'
 
 gem "bcrypt"
 
