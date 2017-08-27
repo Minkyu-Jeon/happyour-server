@@ -13,6 +13,8 @@ gem 'bootstrap', '~> 4.0.0.alpha6'
 
 gem "bcrypt"
 
+gem 'rails-i18n'
+
 # http client
 gem "faraday"
 
