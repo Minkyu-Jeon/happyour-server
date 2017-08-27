@@ -8,6 +8,7 @@ group :assets do
   gem 'uglifier', '>= 1.3.0'
   gem 'coffee-rails', '~> 4.2'
 end
+gem 'jquery-rails'
 
 gem "bcrypt"
 
