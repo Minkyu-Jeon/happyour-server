@@ -1,4 +1,17 @@
 ko:
+  admin:
+    base:
+      navbar:
+        home: "HappyOur"
+      sidebar:
+        users: "사용자 관리"
+        stores: "식당 관리"
+    users:
+      index:
+        title: "사용자 목록"
+    stores:
+      index:
+        title: "식당 목록"
   activerecord:
     models:
       order:
