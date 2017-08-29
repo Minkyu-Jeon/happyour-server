@@ -17,6 +17,8 @@ ko:
     stores:
       index:
         title: "식당 목록"
+      edit:
+        title: "식당 수정"
   activerecord:
     models:
       store: "식당"

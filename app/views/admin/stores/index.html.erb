@@ -1,11 +1,10 @@
 <% content_for :page_title do %>
 <h1><%= t(".title") %></h1>
 <% end %>
-<table class="table table-striped"> 
+<table class="table table-striped">
 	<thead>
 		<tr>
 			<th><%= Store.human_attribute_name("name") %></th>
-			<th><%= Store.human_attribute_name("description") %></th>
 			<th><%= Store.human_attribute_name("open_time") %></th>
 			<th><%= Store.human_attribute_name("close_time") %></th>
 			<th><%= Store.human_attribute_name("address") %></th>
@@ -17,7 +16,6 @@
 		<% @stores.each do |s| %>
 		<tr>
 			<td><%= s.name %></td>
-			<td><%= s.description %></td>
 			<td><%= s.open_time %></td>
 			<td><%= s.close_time %></td>
 			<td><%= s.address %></td>
