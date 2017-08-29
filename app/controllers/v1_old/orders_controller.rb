@@ -18,7 +18,7 @@ class V1::OrdersController < ::ApiController
 
       order.save!
 
-      render json: order, include: ["menu.menu_images"]
+      head :ok
     end
   rescue ActiveRecord::RecordInvalid => e
     if e.record.errors.has_key?(:subscription_exp)
@@ -43,6 +43,6 @@ class V1::OrdersController < ::ApiController
 
     order.update!(is_receive: params[:is_receive])
 
-    render json: order, include: ["menu.menu_images"]
+    render json: order
   end
 end

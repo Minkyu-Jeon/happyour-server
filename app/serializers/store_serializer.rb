@@ -1,5 +1,5 @@
 class StoreSerializer < ApplicationSerializer
-  attributes :id, :name, :address, :description, :code, :open_time, :close_time, :dist
+  attributes :store_id, :name, :address, :description, :code, :open_time, :close_time, :dist
 
   has_many :store_images
   has_many :happyhours
@@ -7,5 +7,9 @@ class StoreSerializer < ApplicationSerializer
 
   def dist
     object.try(:dist).try(:round, 2)
+  end
+
+  def store_id
+    object.id
   end
 end
