@@ -1,6 +1,6 @@
 <%= form_for @store, html: {class: "form-horizontal"} do |f| %>
   <fieldset>
-    <legend>식</legend>
+    <legend><%= Store.model_name.human %></legend>
     <div class="form-group row">
       <label class="col-2 col-form-label">
         <%= Store.human_attribute_name("name") %>
@@ -37,4 +37,10 @@
       </div>
     </div>
   </fieldset>
+<% end %>
+
+<% content_for :javascript do %>
+<script type="text/javascript">
+  Stores.call()
+</script>
 <% end %>

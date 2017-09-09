@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   elsif Rails.application.secrets["server_mode"] == "admin"
     scope module: :admin do
       root to: "users#index"
+
       resources :users
       resources :stores do
         resources :menus

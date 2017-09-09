@@ -12,6 +12,13 @@
 
 ActiveRecord::Schema.define(version: 20170924103601) do
 
+  create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "email",                       null: false
+    t.string "password_digest",             null: false
+    t.string "name",            limit: 100, null: false
+    t.index ["email"], name: "index_admins_on_email", unique: true, using: :btree
+  end
+
   create_table "happyhours", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "store_id",                              null: false
     t.integer  "day_of_week", limit: 1,                 null: false

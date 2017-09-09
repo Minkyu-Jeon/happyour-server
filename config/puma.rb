@@ -17,6 +17,7 @@ app_path = Rails.root
 environment ENV.fetch("RAILS_ENV") { "development" }
 
 bind 'unix:/tmp/happyour.sock'
+pidfile "/tmp/pids/puma.pid"
 stdout_redirect "#{app_path}/log/puma.stdout.log", "#{app_path}/log/puma.stderr.log", true
 
 # Specifies the number of `workers` to boot in clustered mode.

@@ -10,16 +10,8 @@
   </head>
 
   <body>
-  	<%= render 'navbar' %>
-  	<div class="container-fluid">
-      <div class="row">
-        <%= render 'sidebar' %>
-
-        <main class="col-sm-9 ml-sm-auto col-md-10 pt-3" role="main">
-        	<%= yield :page_title %>
-          <%= yield %>
-        </main>
-      </div>
+    <div class="container">
+      <%= yield %>
     </div>
     <%= javascript_include_tag 'application' %>
     <%= yield :javascript %>
