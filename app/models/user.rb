@@ -3,6 +3,7 @@ class User < ApplicationRecord
   has_many :orders, inverse_of: :user
   has_many :user_devices, inverse_of: :user
   has_many :subscription_users, inverse_of: :user
+  has_many :reviews, inverse_of: :user
 
   validates :email, presence: true, uniqueness: true
   validates :nickname, presence: true

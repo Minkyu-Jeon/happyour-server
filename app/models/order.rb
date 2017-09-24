@@ -2,8 +2,6 @@ class Order < ApplicationRecord
 	belongs_to :user, inverse_of: :orders
 	belongs_to :menu, inverse_of: :orders
 
-	has_many :reviews, inverse_of: :order
-
   scope :today, -> { where("created_at > ?", Time.current.beginning_of_day) }
 
   before_create :validate_user_exp_dttm
