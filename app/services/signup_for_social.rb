@@ -24,7 +24,7 @@ class SignupForSocial
 
       user.save or raise FailToSaveError.new(user)
 
-      InvitationUser.new(rec_code).call(user) if rec_code.present?
+      # InvitationUser.new(rec_code).call(user) if rec_code.present?
 
       user
     end

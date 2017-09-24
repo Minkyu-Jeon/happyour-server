@@ -15,8 +15,9 @@ Rails.application.routes.draw do
       get 'menus/:id' => 'menus#show' # 메뉴 상세보기
 
       # 주문
-      post 'orders' => 'orders#create' # 주문하기
-      put 'orders/:id' => 'orders#update' # 수령하기
+      # post 'orders' => 'orders#create' # 주문하기
+      # put 'orders/:id' => 'orders#update' # 수령하기
+      # 리뷰 작성
       post 'reviews' => 'reviews#create' # 평가하기
     end
   elsif Rails.application.secrets["server_mode"] == "admin"
