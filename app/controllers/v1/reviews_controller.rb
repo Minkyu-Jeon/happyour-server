@@ -1,12 +1,12 @@
 class V1::ReviewsController < ::ApiController
   def create
-    require_params! :order_id, :evaluation, :eval_text
+    require_params! :menu_id, :evaluation, :eval_text
 
     ActiveRecord::Base.transaction do
 
-      order = Order.find_by!(id: params[:order_id], is_receive: true)
+      menu = Menu.find_by!(id: params[:menu_id])
 
-      review = order.reviews.create!(review_params)
+      review = menu.reviews.create!(review_params)
 
       render json: review
     end
