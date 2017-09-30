@@ -58,9 +58,7 @@ task :deploy do
     invoke :'deploy:cleanup'
 
     on :launch do
-      in_path(fetch(:current_path)) do
-        invoke :"puma:restart"
-      end
+      invoke :'puma:phased_restart'
     end
   end
 

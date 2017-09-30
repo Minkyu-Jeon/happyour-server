@@ -59,7 +59,7 @@ task :deploy do
     invoke :'deploy:cleanup'
 
     on :launch do
-      invoke :"puma:restart"
+      invoke :'puma:phased_restart'
     end
   end
 
