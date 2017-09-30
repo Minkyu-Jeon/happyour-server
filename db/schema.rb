@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170924103601) do
+ActiveRecord::Schema.define(version: 20170930071329) do
 
   create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email",                       null: false
@@ -78,10 +78,15 @@ ActiveRecord::Schema.define(version: 20170924103601) do
     t.index ["user_id"], name: "index_orders_on_user_id", using: :btree
   end
 
+  create_table "review_images", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "review_id", null: false
+    t.string  "url",       null: false
+    t.index ["review_id"], name: "index_review_images_on_review_id", using: :btree
+  end
+
   create_table "reviews", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "evaluation", limit: 1
     t.text     "eval_text",  limit: 65535
-    t.string   "url"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
     t.integer  "menu_id"
@@ -166,6 +171,7 @@ ActiveRecord::Schema.define(version: 20170924103601) do
   add_foreign_key "menus", "stores"
   add_foreign_key "orders", "menus"
   add_foreign_key "orders", "users"
+  add_foreign_key "review_images", "reviews"
   add_foreign_key "reviews", "menus"
   add_foreign_key "reviews", "users"
   add_foreign_key "store_images", "stores"
