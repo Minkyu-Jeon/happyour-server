@@ -1,57 +1,60 @@
+require 'csv'
 begin
   ActiveRecord::Base.transaction do
-    addrs = [
-      "서울 서대문구 이화여대길 1",
-      "서울 마포구 신촌로4길 3",
-      "서울 마포구 신촌로4길 5-26",
-      "서울 강남구 강남대로 616 (신사미타워)",
-      "경기 남양주시 경춘로양골1길 35",
-      "경기 남양주시 경춘로 1502 (SK호평충전소)",
-      "경기 성남시 분당구 경부고속도로 409",
-      "서울 마포구 성미산로 51 (홍익대학교)",
-      "서울 마포구 월드컵북로 5",
-      "서울 종로구 경교장길 5"
-    ]
-    i = 0
-    10.times do
+    CSV.read(Rails.root.join("files", "stores.csv")).each do |row|
+
       store_params = {
-        name: Faker::Name.name,
-        address: addrs[i],
-        description: Faker::Lorem.paragraph,
+        name: row[0],
+        address: row[1],
+        description: row[2],
         code: Store.code,
-        open_time: "10:00:00",
-        close_time: "23:00:00"
+        open_time: row[3],
+        close_time: row[4]
       }
-      i += 1
       s = Store.new(store_params)
       s.save!
     end
-  end
 
-  ActiveRecord::Base.transaction do
     Store.all.each do |s|
-      s.menus.create!({
-        name: Faker::Name.name,
-        price: Faker::Number.number(5).to_i.round(-4),
-        discounted_price: 500
-      })
-
-      7.times.each.with_index do |d|
-        s.happyhours.create!({
-          day_of_week: d,
-          is_holiday: false,
-          start_time: "10:00:00",
-          end_time: "12:00:00"
+      4.times.with_index(1) do |_, i|
+        s.store_images.create!({
+          url: File.open(Rails.root.join("files", "images", "#{i}.png"))
         })
       end
 
-      s.hash_tags.create!({
-        tag_name: Faker::Name.name
-      })
-    end
-  end
+      YAML.load_file(Rails.root.join("files", "menu.yml")).each do |row|
 
-  ActiveRecord::Base.transaction do
+        menu = s.menus.create!({
+          name: row["name"],
+          price: row["price"],
+          discounted_price: row["discount_price"]
+        })
+
+        4.times.with_index(1) do |_, i|
+          menu.menu_images.create!({
+            url: File.open(Rails.root.join("files", "images", "#{i}.png"))
+          })
+        end
+      end
+
+      YAML.load_file(Rails.root.join("files", "happyour.yml")).each do |row|
+        7.times.each.with_index do |d|
+          s.happyhours.create!({
+            day_of_week: d,
+            is_holiday: row["is_holiday"],
+            start_time: row["start_time"],
+            end_time: row["end_time"]
+          })
+        end
+      end
+
+      YAML.load_file(Rails.root.join("files", "hashtag.yml")).each do |row|
+        s.hash_tags.create!({
+          tag_name: row["name"]
+        })
+      end
+    end
+
     # 친구 추가시 제공하는 무료 구독
     Subscription.create!({
       title: "친구 초대 무료 구독권",

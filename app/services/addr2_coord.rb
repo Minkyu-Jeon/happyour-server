@@ -2,7 +2,7 @@ class Addr2Coord
   # lat: 위도, lng: 경도
   attr_reader :lat, :lng
   def initialize(addr)
-    @addr = addr
+    @addr = URI.encode(addr)
     @api_key = Rails.application.secrets.daum_api_key
     @url = "https://apis.daum.net"
   end
