@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170930071329) do
+ActiveRecord::Schema.define(version: 20180203050554) do
 
   create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email",                       null: false
@@ -40,16 +40,6 @@ ActiveRecord::Schema.define(version: 20170930071329) do
     t.index ["tag_name"], name: "index_hash_tags_on_tag_name", using: :btree
   end
 
-  create_table "invitations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "user_id",         null: false
-    t.string   "email"
-    t.integer  "invited_user_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.index ["invited_user_id"], name: "index_invitations_on_invited_user_id", using: :btree
-    t.index ["user_id"], name: "index_invitations_on_user_id", using: :btree
-  end
-
   create_table "menu_images", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "menu_id", null: false
     t.string  "url"
@@ -64,18 +54,6 @@ ActiveRecord::Schema.define(version: 20170930071329) do
     t.datetime "updated_at",       null: false
     t.integer  "discounted_price"
     t.index ["store_id"], name: "index_menus_on_store_id", using: :btree
-  end
-
-  create_table "orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "user_id",                    null: false
-    t.integer  "menu_id",                    null: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.boolean  "is_receive", default: false
-    t.index ["is_receive"], name: "index_orders_on_is_receive", using: :btree
-    t.index ["menu_id"], name: "index_orders_on_menu_id", using: :btree
-    t.index ["user_id", "is_receive"], name: "index_orders_on_user_id_and_is_receive", using: :btree
-    t.index ["user_id"], name: "index_orders_on_user_id", using: :btree
   end
 
   create_table "review_images", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -114,27 +92,6 @@ ActiveRecord::Schema.define(version: 20170930071329) do
     t.index ["code"], name: "index_stores_on_code", using: :btree
   end
 
-  create_table "subscription_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "user_id",         null: false
-    t.integer  "subscription_id", null: false
-    t.datetime "expired_at",      null: false
-    t.integer  "invitation_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.index ["expired_at"], name: "index_subscription_users_on_expired_at", using: :btree
-    t.index ["invitation_id"], name: "index_subscription_users_on_invitation_id", using: :btree
-    t.index ["subscription_id"], name: "index_subscription_users_on_subscription_id", using: :btree
-    t.index ["user_id"], name: "index_subscription_users_on_user_id", using: :btree
-  end
-
-  create_table "subscriptions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "title",                       null: false
-    t.integer  "subscription_type", limit: 1
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.integer  "days",                        null: false
-  end
-
   create_table "user_devices", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id",      null: false
     t.string   "os_type"
@@ -166,16 +123,11 @@ ActiveRecord::Schema.define(version: 20170930071329) do
 
   add_foreign_key "happyhours", "stores"
   add_foreign_key "hash_tags", "stores"
-  add_foreign_key "invitations", "users"
   add_foreign_key "menu_images", "menus"
   add_foreign_key "menus", "stores"
-  add_foreign_key "orders", "menus"
-  add_foreign_key "orders", "users"
   add_foreign_key "review_images", "reviews"
   add_foreign_key "reviews", "menus"
   add_foreign_key "reviews", "users"
   add_foreign_key "store_images", "stores"
-  add_foreign_key "subscription_users", "subscriptions"
-  add_foreign_key "subscription_users", "users"
   add_foreign_key "user_devices", "users"
 end
