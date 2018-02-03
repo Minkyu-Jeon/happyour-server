@@ -12,8 +12,8 @@ class ApiController < ApplicationController
 		end
 	end
 
-	def happyout_header
-		@happyout_header ||= {
+	def happyour_header
+		@happyour_header ||= {
 			os_type: request.headers["X-Happyour-OS-Type"],
 			os_version: request.headers["X-Happyour-OS-Version"],
 			version: request.headers["X-Happyour-Version"],

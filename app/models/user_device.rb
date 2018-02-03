@@ -1,5 +1,5 @@
 class UserDevice < ApplicationRecord
-  belongs_to :user, inverse_of: :user_devices
+  belongs_to :user, inverse_of: :user_device
   validates :user, presence: true, uniqueness: true
   validates :access_token, presence: true, uniqueness: true
 

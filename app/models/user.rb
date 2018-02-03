@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_many :user_devices, inverse_of: :user
+  has_one :user_device, inverse_of: :user
   has_many :reviews, inverse_of: :user
 
   validates :loginid, presence: true, uniqueness: true

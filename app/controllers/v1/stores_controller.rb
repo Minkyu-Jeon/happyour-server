@@ -16,6 +16,6 @@ class V1::StoresController < ::ApiController
 
   private
   def require_store_params!
-    !(params[:time].present? ^ params[:page].present?) or raise BlankParameterError.new
+    !(params[:time].present? ^ params[:page].present?) or raise BlankParameterError.new("time or page")
   end
 end

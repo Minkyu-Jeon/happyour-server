@@ -11,14 +11,14 @@ class SignupForSocial
     end
   end
 
-  def call
+  def call(happyour_header)
     ActiveRecord::Base.transaction do
       rec_code = attrs.delete(:recommendation_code)
       user or raise ServiceError.new("사용자 정보를 받아올 수 없음", :forbidden)
       user.persisted? and raise ServiceError.new("이메일 중복", :conflict)
       user.attributes = attrs
       user.save or raise FailToSaveError.new(user)
-      user
+      UpdateDeviceInfo.new(user).call(happyour_header)
     end
   end
 end
