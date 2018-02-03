@@ -15,7 +15,7 @@ class AuthenticationForNaver
     begin
       if response.status == 200
         resp = JSON.parse(response.body)["response"]
-        user = User.find_or_initialize_by(email: resp["email"])
+        user = User.find_or_initialize_by(loginid: resp["email"])
         return user if user.persisted?
         user.attributes = user_params(resp)
         user
