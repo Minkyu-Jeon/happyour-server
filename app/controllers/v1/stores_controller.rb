@@ -1,28 +1,12 @@
 class V1::StoresController < ::ApiController
   def index
-    require_params! :type
+    require_params! :gps
+    require_store_params!
 
-    case params[:type]
-    when "gps"
-      require_params! :gps
-
-      data = StoreService.new.around(params[:gps])
-    when "hash_tag"
-      require_params! :tag_name
-
-      data = StoreService.new.hash_tag(params[:tag_name])
-    when "addr"
-      require_params! :addr
-
-      data = StoreService.new.addr(params[:addr])
-    end
-
-    c_time = Time.current
-    wday = c_time.wday
-
-    data = data.joins(:happyhours).where(happyhours: { day_of_week: wday })
-
-    render json: data, each_serializer: StoreSerializer
+    @stores = StoreService.call(params)
+    meta = { store_count: @stores[:total_count] }
+    meta.merge!(current_page: params[:page]) if params[:page].present?
+    render json: @stores[:records], adapter: :json, root: :stores, meta: meta
   end
 
   def show
@@ -31,5 +15,10 @@ class V1::StoresController < ::ApiController
     store = Store.distance_from(params[:gps]).includes(:happyhours, menus: :menu_images).find(params[:id])
 
     render json: store, serializer: StoreShowSerializer, include: ["*", "menus.*"]
+  end
+
+  private
+  def require_store_params!
+    !(params[:time].present? ^ params[:page].present?) or raise BlankParameterError.new
   end
 end

@@ -7,7 +7,7 @@ begin
         name: row[0],
         address: row[1],
         description: row[2],
-        code: Store.code,
+        promotion_tag: "123",
         open_time: row[3],
         close_time: row[4]
       }

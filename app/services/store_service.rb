@@ -1,13 +1,30 @@
 class StoreService
-  def around(gps)
-    Store.includes(:store_images).distance_from(gps).by_dist
-  end
+  class << self
 
-  def hash_tag(tag_name)
-    Store.joins(:hash_tags).where("hash_tags.tag_name LIKE ?", "%#{tag_name}%")
-  end
+    def call(params)
+      result = {}
 
-  def addr(addr)
-    Store.where("address LIKE ?", "%#{addr}%")
+      scope = Store.distance_from(params[:gps]).includes(:hash_tags, :store_images)
+
+      if params[:time].present?
+        subquery = Happyhour.select(:store_id).where("start_time <= :time AND end_time >= :time", {time: params[:time]})
+          .group(:store_id)
+        scope = scope.where("stores.id IN (#{subquery.to_sql})")
+      end
+
+      result = { records: scope, total_count: scope.size }
+
+      if params[:page].present?
+        offset = page_limit * (params[:page].to_i - 1)
+        result[:records] = scope.limit(page_limit).offset(offset)
+      end
+
+      result
+    end
+
+    private
+    def page_limit
+      @@page_limit ||= 20
+    end
   end
 end

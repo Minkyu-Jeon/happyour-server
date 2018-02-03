@@ -24,7 +24,7 @@ class Store < ApplicationRecord
 
     select_dist = <<-SELECT_DIST
     (
-      111.111 * (
+      111111 * (
         DEGREES(ACOS(COS(RADIANS(:lat1))
           * COS(RADIANS(lat2))
           * COS(RADIANS(:lng1 - lng2))

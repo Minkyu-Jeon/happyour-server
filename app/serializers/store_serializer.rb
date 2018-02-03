@@ -1,15 +1,25 @@
 class StoreSerializer < ApplicationSerializer
-  attributes :store_id, :name, :address, :promotion_tag, :description, :open_time, :close_time, :dist
-
-  has_many :store_images
-  has_many :happyhours
-  has_many :hash_tags
+  attributes :store_id, :name, :promotion_tag, :dist, :hash_tags
+  has_one :image
 
   def dist
-    object.try(:dist).try(:round, 2)
+    object.try(:dist).try(:round)
   end
 
   def store_id
     object.id
+  end
+
+  def image
+    images.try(:first).try(:url).try(:url)
+  end
+
+  def hash_tags
+    object.hash_tags.map(&:tag_name)
+  end
+
+  private
+  def images
+    object.store_images
   end
 end
