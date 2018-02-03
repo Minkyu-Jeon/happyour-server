@@ -1,4 +1,6 @@
 class V1::ReviewsController < ::ApiController
+  before_action :authenticate_user_token!
+
   def create
     require_params! :menu_id, :evaluation, :eval_text
 

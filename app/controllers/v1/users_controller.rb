@@ -1,6 +1,4 @@
 class V1::UsersController < ::ApiController
-	skip_before_action :authenticate_user_token!, raise: false
-
 	def social_signup
 		require_params! :access_token, :social_type, :nickname
 		result = SignupForSocial.new(social_params).call
