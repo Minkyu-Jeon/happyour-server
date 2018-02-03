@@ -3,6 +3,7 @@ class Store < ApplicationRecord
 	has_many :menus, inverse_of: :store
   has_many :happyhours, inverse_of: :store
   has_many :hash_tags, inverse_of: :store
+  has_many :reviews, inverse_of: :store
 
 	validates :name, :address, presence: true
 	validates :open_time, :close_time, length: { maximum: 8 }

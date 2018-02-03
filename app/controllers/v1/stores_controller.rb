@@ -10,11 +10,8 @@ class V1::StoresController < ::ApiController
   end
 
   def show
-    require_params! :gps
-
-    store = Store.distance_from(params[:gps]).includes(:happyhours, menus: :menu_images).find(params[:id])
-
-    render json: store, serializer: StoreShowSerializer, include: ["*", "menus.*"]
+    store = Store.includes(:happyhours, {menus: :menu_images}, :hash_tags).find(params[:id])
+    render json: store, adapter: :json, root: :store, serializer: StoreShowSerializer
   end
 
   private
