@@ -1,5 +1,5 @@
 class StoreSerializer < ApplicationSerializer
-  attributes :store_id, :name, :address, :description, :code, :open_time, :close_time, :dist
+  attributes :store_id, :name, :address, :description, :open_time, :close_time, :dist
 
   has_many :store_images
   has_many :happyhours

@@ -4,7 +4,6 @@ class V1::UsersController < ::ApiController
 	def social_signup
 		require_params! :access_token, :social_type, :nickname
 		result = SignupForSocial.new(social_params).call
-
 		render json: result
 	end
 
@@ -40,6 +39,6 @@ class V1::UsersController < ::ApiController
 	end
 
 	def social_params
-		params.permit(:nickname, :social_type, :access_token, :phone_number, :recommendation_code)
+		params.permit(:nickname, :social_type, :access_token, :phone_number)
 	end
 end

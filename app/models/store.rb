@@ -6,18 +6,10 @@ class Store < ApplicationRecord
 
 	validates :name, :address, presence: true
 	validates :open_time, :close_time, length: { maximum: 8 }
-	validates :code, length: { maximum: 6 }
 
   scope :by_dist, -> { order("dist") }
 
   before_save :set_gps
-
-  def self.code
-    begin
-      code = sprintf("%06d", SecureRandom.random_number(999999))
-    end while self.exists?(code: code)
-    code
-  end
 
   def self.select_with_args(sql, args)
     query = sanitize_sql_array([sql, args].flatten)
