@@ -1,4 +1,4 @@
-<%= form_for @store, html: {class: "form-horizontal"} do |f| %>
+<%= form_for @store, html: {id: "store-form", class: "form-horizontal"} do |f| %>
   <fieldset>
     <legend><%= Store.model_name.human %></legend>
     <div class="form-group row">
@@ -37,10 +37,19 @@
       </div>
     </div>
   </fieldset>
-<% end %>
 
+  <fieldset>
+    <legend><%= Store.model_name.human %></legend>
+    <div id="store-image-form" class="dropzone" data-url="<%= store_images_path %>">
+      <%= file_field_tag "image", multiple: true %>
+    </div>
+  </fieldset>
+<% end %>
 <% content_for :javascript do %>
 <script type="text/javascript">
-  Stores.call()
+  var storeImages = <%= @store.store_images.to_json.html_safe %>
+  $("#store-image-form").storeForm({
+    storeImages: storeImages
+  });
 </script>
 <% end %>

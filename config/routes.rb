@@ -16,6 +16,7 @@ Rails.application.routes.draw do
         resources :menus
         resources :orders
       end
+      resources :store_images, only: [:create]
 
       get "/login" => "sessions#new"
       post "/login" => "sessions#create"

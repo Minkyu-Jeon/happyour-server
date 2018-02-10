@@ -2,6 +2,9 @@ class Admin::SessionsController < Admin::BaseController
   skip_before_action :authenticate_admin!
   layout 'admin/session'
 
+  def new
+  end
+
   def create
     admin = Admin.find_by(email: params[:email])
     unless admin.try(:authenticate, params[:password])
