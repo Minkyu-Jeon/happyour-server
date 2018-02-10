@@ -8,6 +8,6 @@ class StoreImageSerializer < ApplicationSerializer
   end
 
   def url
-    object.url.try(:url)
+    object.image.try(:url)
   end
 end

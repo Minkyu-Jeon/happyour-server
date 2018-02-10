@@ -6,7 +6,7 @@ class MenuThumbnailSerializer < ApplicationSerializer
   end
 
   def image
-    images.first.try(:url).try(:url)
+    images.first.try(:image).try(:url)
   end
 
   private

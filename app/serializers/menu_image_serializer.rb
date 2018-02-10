@@ -8,6 +8,6 @@ class MenuImageSerializer < ApplicationSerializer
   end
 
   def url
-    object.url.try(:url)
+    object.image
   end
 end

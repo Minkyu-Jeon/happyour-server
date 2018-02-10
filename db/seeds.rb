@@ -18,7 +18,7 @@ begin
     Store.all.each do |s|
       4.times.with_index(1) do |_, i|
         s.store_images.create!({
-          url: File.open(Rails.root.join("files", "images", "#{i}.png"))
+          image: File.open(Rails.root.join("files", "images", "#{i}.png"))
         })
       end
 
@@ -32,7 +32,7 @@ begin
 
         4.times.with_index(1) do |_, i|
           menu.menu_images.create!({
-            url: File.open(Rails.root.join("files", "images", "#{i}.png"))
+            image: File.open(Rails.root.join("files", "images", "#{i}.png"))
           })
         end
       end

@@ -11,7 +11,7 @@ class StoreSerializer < ApplicationSerializer
   end
 
   def image
-    images.try(:first).try(:url).try(:url)
+    images.try(:first).try(:image)
   end
 
   def hash_tags
