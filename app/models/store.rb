@@ -12,6 +12,8 @@ class Store < ApplicationRecord
 
   before_save :set_gps
 
+  accepts_nested_attributes_for :store_images, allow_destroy: true
+
   def self.select_with_args(sql, args)
     query = sanitize_sql_array([sql, args].flatten)
     select(query)

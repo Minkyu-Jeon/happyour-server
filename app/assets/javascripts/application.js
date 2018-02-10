@@ -15,4 +15,5 @@
 //= require popper
 //= require bootstrap
 //= require dropzone
+//= require dropzone.locale.ko
 //= require_tree .

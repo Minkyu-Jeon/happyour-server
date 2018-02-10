@@ -18,7 +18,8 @@ begin
     Store.all.each do |s|
       4.times.with_index(1) do |_, i|
         s.store_images.create!({
-          image: File.open(Rails.root.join("files", "images", "#{i}.png"))
+          image: File.open(Rails.root.join("files", "images", "#{i}.png")),
+          display_order: i
         })
       end
 

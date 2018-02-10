@@ -39,15 +39,22 @@
   </fieldset>
 
   <fieldset>
-    <legend><%= Store.model_name.human %></legend>
+    <legend><%= StoreImage.model_name.human %></legend>
+    <div id="store-images" class="row"></div>
+    <div id="removed-image" class="clearfix m-bottom-lg"></div>
     <div id="store-image-form" class="dropzone" data-url="<%= store_images_path %>">
       <%= file_field_tag "image", multiple: true %>
     </div>
   </fieldset>
+
+  <div class="form-group text-right m-top-lg">
+    <button type='submit' class="btn btn-primary"><%= t("btn.submit") %></button>
+    <%= link_to t("btn.cancel"), stores_path, class: "btn btn-danger" %>
+  </div>
 <% end %>
 <% content_for :javascript do %>
 <script type="text/javascript">
-  var storeImages = <%= @store.store_images.to_json.html_safe %>
+  var storeImages = <%= @store.store_images.to_json(only: [:id, :display_order], methods: [:image_url]).html_safe %>
   $("#store-image-form").storeForm({
     storeImages: storeImages
   });

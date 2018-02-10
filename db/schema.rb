@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180203071918) do
+ActiveRecord::Schema.define(version: 20180210070237) do
 
   create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email",                       null: false
@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(version: 20180203071918) do
   create_table "store_images", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "store_id"
     t.string  "url"
+    t.integer "display_order", default: 0
     t.index ["store_id"], name: "index_store_images_on_store_id", using: :btree
   end
 

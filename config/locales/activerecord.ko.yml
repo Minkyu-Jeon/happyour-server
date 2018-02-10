@@ -2,6 +2,7 @@ ko:
   activerecord:
     models:
       store: "식당"
+      store_image: "식당 사진"
     attributes:
       store:
         name: "식당명"

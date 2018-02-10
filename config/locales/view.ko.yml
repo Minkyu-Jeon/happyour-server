@@ -28,5 +28,6 @@ ko:
         title: "식당 수정"
   btn:
     submit: "전송"
+    cancel: "취소"
   label:
     edit: "수정"
