@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   if Rails.application.secrets["server_mode"] == "api"
     namespace :v1 do
-    	post 'user/signup' => 'users#social_signup' # 회원가입
     	post 'login' => 'users#social_login' # 로그인
       get 'stores' => 'stores#index' # 가맹점 목록
       get 'stores/:id' => 'stores#show' # 가맹점 상세보기
