@@ -4,7 +4,6 @@ class User < ApplicationRecord
   has_many :review_evaluations, inverse_of: :user
 
   validates :loginid, presence: true, uniqueness: true
-  validates :nickname, presence: true
   validates :social_type, inclusion: { in: [1, 2] }, allow_nil: true
 
   has_secure_password
