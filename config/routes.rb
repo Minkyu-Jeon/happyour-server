@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       get 'menus/:id' => 'menus#show' # 메뉴 상세보기
       post 'stores/:store_id/reviews' => 'reviews#create' # 평가하기
       get 'stores/:store_id/reviews' => 'reviews#index'
+      post 'reviews/:id/evaluate' => 'reviews#evaluate'
     end
   elsif Rails.application.secrets["server_mode"] == "admin"
     scope module: :admin do
