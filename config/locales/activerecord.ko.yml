@@ -3,6 +3,8 @@ ko:
     models:
       store: "식당"
       store_image: "식당 사진"
+      menu: "메뉴"
+      happyhour: "해피아워"
     attributes:
       store:
         name: "식당명"
@@ -11,8 +13,21 @@ ko:
         close_time: "영업종료 시간"
         address: "주소"
         created_at: "가맹일시"
+      menu:
+        name: "메뉴명"
+        price: "가격"
+        discounted_price: "할인가"
+      happyhour:
+        day_of_week: 요일
+        start_time: 시작시간
+        end_time: 종료시간
+        is_holiday: 휴일여부
       admin:
         email: '이메일'
         password: "비밀번호"
+    values:
+      happyhour:
+        day_of_week:
+          
 
 

@@ -1,9 +1,15 @@
 class Admin::StoresController < Admin::BaseController
-  before_action :find_store, only: [:edit, :update]
+  before_action :find_store, only: [:edit, :update, :show]
 	def index
 		set_menu("stores", "index")
 		@stores = Store.all
 	end
+
+  def show
+    set_menu("stores", "show")
+    @menus = @store.menus.includes(:menu_images)
+    @happyhours = @store.happyhours
+  end
 
   def edit
     set_menu("stores", "edit")

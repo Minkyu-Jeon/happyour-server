@@ -2,6 +2,8 @@ ko:
   time:
     formats:
       default: "%F %T"
+  date:
+    day_names: ["일요일", "월요일", "화요일", "수요일", "목요일", "금요일", "토요일"]
   authenticate:
     fail: "로그인이 필요합니다."
     invalid: "아이디 혹은 비밀번호가 맞지 않습니다."

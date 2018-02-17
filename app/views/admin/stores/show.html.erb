@@ -1,0 +1,52 @@
+<% content_for :page_title do %>
+<h1><%= @store.name %></h1>
+<% end %>
+
+<h3><%= Menu.model_name.human %></h3>
+<table class="table table-striped"> 
+	<thead>
+		<tr>
+			<th><%= Menu.human_attribute_name :name %></th>
+			<th><%= Menu.human_attribute_name :price %></th>
+			<th><%= Menu.human_attribute_name :discounted_price %></th>
+			<th><%= t('label.edit') %></th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @menus.each do |m| %>
+			<tr>
+				<td>
+					<span class="m-right-md"><%= m.name %></span>
+					<% if image = m.menu_images.first %>
+						<img src="<%= image.image %>" class="menu_thumbnail">
+					<% end %>
+				</td>
+				<td><%= m.price %></td>
+				<td><%= m.discounted_price %></td>
+				<td>
+					<%= link_to edit_store_menu_path(m) do %>
+						<i class="fa fa-edit"></i>
+					<% end %>
+				</td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>
+
+<h3><%= Happyhour.model_name.human %></h3>
+<table class="table table-striped"> 
+	<thead>
+		<tr>
+			<th><%= Happyhour.human_attribute_name :day_of_week %></th>
+			<th><%= t('label.edit') %></th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @happyhours.group_by(&:day_of_week).each do |day_of_week, hhs| %>
+			<tr>
+				<td><%= t("date.day_names")[day_of_week] %></td>
+				<td></td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>

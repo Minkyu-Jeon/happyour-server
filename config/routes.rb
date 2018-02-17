@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       resources :users
       resources :stores do
         resources :menus
-        resources :orders
+        resources :happyhours
       end
       resources :store_images, only: [:create]
 
