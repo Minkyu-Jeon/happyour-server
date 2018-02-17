@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180217015310) do
+ActiveRecord::Schema.define(version: 20180217015731) do
 
   create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email",                       null: false
@@ -54,6 +54,16 @@ ActiveRecord::Schema.define(version: 20180217015310) do
     t.datetime "updated_at",       null: false
     t.integer  "discounted_price"
     t.index ["store_id"], name: "index_menus_on_store_id", using: :btree
+  end
+
+  create_table "review_evaluations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "user_id",              null: false
+    t.integer  "review_id",            null: false
+    t.integer  "evaluation", limit: 1, null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.index ["review_id"], name: "index_review_evaluations_on_review_id", using: :btree
+    t.index ["user_id"], name: "index_review_evaluations_on_user_id", using: :btree
   end
 
   create_table "review_images", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -123,6 +133,8 @@ ActiveRecord::Schema.define(version: 20180217015310) do
   add_foreign_key "hash_tags", "stores"
   add_foreign_key "menu_images", "menus"
   add_foreign_key "menus", "stores"
+  add_foreign_key "review_evaluations", "reviews"
+  add_foreign_key "review_evaluations", "users"
   add_foreign_key "review_images", "reviews"
   add_foreign_key "reviews", "stores"
   add_foreign_key "reviews", "users"
