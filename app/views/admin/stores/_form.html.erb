@@ -40,8 +40,6 @@
 
   <fieldset>
     <legend><%= StoreImage.model_name.human %></legend>
-    <div id="store-images" class="row"></div>
-    <div id="removed-image" class="clearfix m-bottom-lg"></div>
     <div id="store-image-form" class="dropzone" data-url="<%= store_images_path %>">
       <%= file_field_tag "image", multiple: true %>
     </div>
@@ -55,8 +53,10 @@
 <% content_for :javascript do %>
 <script type="text/javascript">
   var storeImages = <%= @store.store_images.to_json(only: [:id, :display_order], methods: [:image_url]).html_safe %>
-  $("#store-image-form").storeForm({
-    storeImages: storeImages
+  $("#store-image-form").imageUploader({
+    formName: "store",
+    formAttribute: "[store_images_attributes][]",
+    images: storeImages
   });
 </script>
 <% end %>
