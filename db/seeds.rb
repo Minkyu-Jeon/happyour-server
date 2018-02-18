@@ -33,6 +33,7 @@ begin
 
         4.times.with_index(1) do |_, i|
           menu.menu_images.create!({
+            display_order: i,
             image: File.open(Rails.root.join("files", "images", "#{i}.png"))
           })
         end

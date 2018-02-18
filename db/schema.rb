@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180217015731) do
+ActiveRecord::Schema.define(version: 20180218083908) do
 
   create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email",                       null: false
@@ -41,8 +41,9 @@ ActiveRecord::Schema.define(version: 20180217015731) do
   end
 
   create_table "menu_images", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "menu_id", null: false
+    t.integer "menu_id",                   null: false
     t.string  "url"
+    t.integer "display_order", default: 0
     t.index ["menu_id"], name: "index_menu_images_on_menu_id", using: :btree
   end
 
