@@ -1,0 +1,55 @@
+<%= form_for [@store, @menu], html: {id: "menu-form", class: "form-horizontal"} do |f| %>
+  <fieldset>
+    <legend><%= Menu.model_name.human %></legend>
+    <div class="form-group row">
+      <label class="col-2 col-form-label">
+        <%= Menu.human_attribute_name("name") %>
+      </label>
+      <div class="col-10">
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-2 col-form-label">
+        <%= Menu.human_attribute_name("price") %>
+      </label>
+      <div class="col-10">
+        <%= f.number_field :price, class: "form-control" %>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-2 col-form-label">
+        <%= Menu.human_attribute_name("discounted_price") %>
+      </label>
+      <div class="col-10">
+        <%= f.number_field :discounted_price, class: "form-control" %>
+      </div>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend><%= MenuImage.model_name.human %></legend>
+    <div id="menu-image-form" class="dropzone" data-url="<%= menu_images_path %>">
+      <%= file_field_tag "image", multiple: true %>
+    </div>
+  </fieldset>
+
+  <div class="form-group text-right m-top-lg">
+    <button type='submit' class="btn btn-primary"><%= t("btn.submit") %></button>
+    <%= link_to t("btn.cancel"), stores_path, class: "btn btn-danger" %>
+  </div>
+<% end %>
+<% content_for :javascript do %>
+<script type="text/javascript">
+  var menuImages = <%= @menu.menu_images.to_json(only: [:id, :display_order], methods: [:image_url]).html_safe %>
+  $("#menu-image-form").imageUploader({
+    formName: "menu",
+    formAttribute: "[menu_images_attributes][]",
+    imageWrapper: ".menu-image-wrapper",
+    imageDropzone: "#menu-image-form",
+    images: menuImages
+  });
+</script>
+<% end %>

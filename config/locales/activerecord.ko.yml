@@ -5,6 +5,7 @@ ko:
       store_image: "식당 사진"
       menu: "메뉴"
       happyhour: "해피아워"
+      menu_image: "메뉴 사진"
     attributes:
       store:
         name: "식당명"

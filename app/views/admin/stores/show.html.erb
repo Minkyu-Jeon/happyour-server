@@ -17,7 +17,7 @@
 			<tr>
 				<td>
 					<span class="m-right-md"><%= m.name %></span>
-					<% if image = m.menu_images.first %>
+					<% if image = m.menu_images.by_display_order.first %>
 						<img src="<%= image.image %>" class="menu_thumbnail">
 					<% end %>
 				</td>

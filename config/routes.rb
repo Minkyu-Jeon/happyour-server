@@ -18,6 +18,7 @@ Rails.application.routes.draw do
         resources :happyhours
       end
       resources :store_images, only: [:create]
+      resources :menu_images, only: [:create]
 
       get "/login" => "sessions#new"
       post "/login" => "sessions#create"

@@ -28,6 +28,9 @@ ko:
         title: "식당 목록"
       edit:
         title: "식당 수정"
+    menus:
+      edit:
+        title: "메뉴 수정"
   btn:
     submit: "전송"
     cancel: "취소"
