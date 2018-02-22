@@ -15,7 +15,11 @@ Rails.application.routes.draw do
       resources :users
       resources :stores do
         resources :menus
-        resources :happyhours
+        resources :happyhours do
+          get "bulk_edit", on: :collection
+          post "bulk_update", on: :collection
+          post "set_holiday", on: :collection
+        end
       end
       resources :store_images, only: [:create]
       resources :menu_images, only: [:create]

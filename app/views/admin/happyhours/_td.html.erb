@@ -1,0 +1,11 @@
+<% if happyhours.present? %>
+	<% happyhours.each do |hh| %>
+		<div class="hh">
+			<% if hh.time_range == true %>
+				휴일
+			<% else %>
+				<%= hh.time_range %>
+			<% end %>
+		</div>
+	<% end %>
+<% end %>

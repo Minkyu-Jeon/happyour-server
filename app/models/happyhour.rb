@@ -7,7 +7,7 @@ class Happyhour < ApplicationRecord
 
 
   def time_range
-    TimeRange.new(start_time, end_time)
+    is_holiday || TimeRange.new(start_time, end_time)
   end
 
   private

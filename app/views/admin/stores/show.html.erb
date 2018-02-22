@@ -34,19 +34,42 @@
 </table>
 
 <h3><%= Happyhour.model_name.human %></h3>
-<table class="table table-striped"> 
+<table id="happyour-table" class="table table-striped" data-store-id="<%= @store.id %>">
+	<colgroup>
+		<col width="250px">
+		<col>
+		<col width="80px">
+	</colgroup>
 	<thead>
 		<tr>
 			<th><%= Happyhour.human_attribute_name :day_of_week %></th>
-			<th><%= t('label.edit') %></th>
+			<th><%= Happyhour.model_name.human %></th>
+			<th><%= t("label.edit") %></th>
 		</tr>
 	</thead>
 	<tbody>
-		<% @happyhours.group_by(&:day_of_week).each do |day_of_week, hhs| %>
-			<tr>
-				<td><%= t("date.day_names")[day_of_week] %></td>
-				<td></td>
+		<% t("date.day_names").each.with_index do |name, i| %>
+			<tr data-day-of-week="<%= i %>">
+				<td>
+					<%= name  %>
+					<button type="button" class="set-holiday btn btn-primary btn-sm m-left-sm"><%= t(".set_to_holiday") %></button>		
+				</td>
+				<td class="td-form">
+					<div class="content">
+						<%= render partial: '/admin/happyhours/td', locals: {happyhours: @happyhours[i]} %>
+					</div>
+					<div class="form">
+					</div>
+				</td>
+				<td>
+					<a href="#" class="edit-happyour"><i class='fa fa-edit'></i></a>
+				</td>
 			</tr>
 		<% end %>
 	</tbody>
 </table>
+<% content_for :javascript do %>
+	<script type="text/javascript">
+		$("#happyour-table").happyourForm();
+	</script>
+<% end %>

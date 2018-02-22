@@ -28,6 +28,8 @@ ko:
         title: "식당 목록"
       edit:
         title: "식당 수정"
+      show:
+        set_to_holiday: "휴일로 지정"
     menus:
       edit:
         title: "메뉴 수정"

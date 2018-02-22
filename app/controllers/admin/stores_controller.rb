@@ -8,7 +8,7 @@ class Admin::StoresController < Admin::BaseController
   def show
     set_menu("stores", "show")
     @menus = @store.menus.includes(:menu_images)
-    @happyhours = @store.happyhours
+    @happyhours = @store.happyhours.group_by(&:day_of_week)
   end
 
   def edit
@@ -25,7 +25,7 @@ class Admin::StoresController < Admin::BaseController
 
   private
   def find_store
-    @store = Store.find(params[:id])
+    @store = Store.includes(:menus, :happyhours).find(params[:id])
   end
 
   def store_params

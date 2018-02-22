@@ -1,0 +1,20 @@
+<%= form_tag bulk_update_store_happyhours_path(@store), authenticity_token: false do %>
+	<%= hidden_field_tag "day_of_week", params[:day_of_week] %>
+	<% @happyhours.each do |hh| %>
+		<div class="form-group">
+			<%= hidden_field_tag "happyhour[][id]", hh.id %>
+			<% if hh.is_holiday %>
+			<span>휴일</span>
+			<% else %>
+			<%= text_field_tag "happyhour[][start_time]", hh.start_time, class: "form-control inline-block width-120px" %>
+			<%= text_field_tag "happyhour[][end_time]", hh.end_time, class: "form-control inline-block width-120px" %>
+			<% end %>
+			<%= link_to "#", class: "remove" do %>
+				<i class="fa fa-trash"></i>
+			<% end %>
+		</div>
+	<% end %>
+	<%= link_to "#", class: "plus" do %>
+		<i class="fa fa-plus"></i>
+	<% end %>
+<% end %>
