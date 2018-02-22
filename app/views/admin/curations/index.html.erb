@@ -17,7 +17,7 @@
 		<% @curations.each do |c| %>
 			<tr>
 				<td><%= c.title %></td>
-				<td><%= c.is_published %></td>
+				<td><%= c.translate(:is_published) %></td>
 				<td><%= l c.created_at %></td>
 				<td>
 					<%= link_to edit_curation_path(c) do %>
