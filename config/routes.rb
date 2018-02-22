@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     scope module: :admin do
       root to: "users#index"
       resources :users
+      resources :curations
       resources :stores do
         resources :menus
         resources :happyhours do

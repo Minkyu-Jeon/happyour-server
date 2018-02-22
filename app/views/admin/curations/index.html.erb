@@ -1,0 +1,30 @@
+<% content_for :page_title do %>
+<h1><%= t(".title") %></h1>
+<% end %>
+<div class="form-group text-right">
+	<%= link_to t("btn.register"), new_curation_path, class: "btn btn-primary" %>
+</div>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th><%= Curation.human_attribute_name("title") %></th>
+			<th><%= Curation.human_attribute_name("is_published") %></th>
+			<th><%= Curation.human_attribute_name("created_at") %></th>
+			<th><%= t('label.edit') %></th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @curations.each do |c| %>
+			<tr>
+				<td><%= c.title %></td>
+				<td><%= c.is_published %></td>
+				<td><%= l c.created_at %></td>
+				<td>
+					<%= link_to edit_curation_path(c) do %>
+						<i class="fa fa-edit"></i>
+					<% end %>		
+				</td>
+			</tr>
+		<% end %>
+	</tbody>
+</table>

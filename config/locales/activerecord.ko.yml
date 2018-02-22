@@ -26,9 +26,17 @@ ko:
       admin:
         email: '이메일'
         password: "비밀번호"
+      curation:
+        title: "제목"
+        is_published: "발행 여부"
+        created_at: "생성일"
     values:
       happyhour:
         day_of_week:
+      curation:
+        is_published:
+          "true": "발행"
+          "false": "미발행"
           
 
 

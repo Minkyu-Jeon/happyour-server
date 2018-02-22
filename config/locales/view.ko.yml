@@ -17,6 +17,7 @@ ko:
       sidebar:
         users: "사용자 관리"
         stores: "식당 관리"
+        curations: "큐레이션"
     sessions:
       new:
         title: "로그인"
@@ -33,8 +34,12 @@ ko:
     menus:
       edit:
         title: "메뉴 수정"
+    curations:
+      index:
+        title: "큐레이션"
   btn:
     submit: "전송"
     cancel: "취소"
+    register: "등록"
   label:
     edit: "수정"

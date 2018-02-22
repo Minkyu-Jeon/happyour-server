@@ -1,0 +1,43 @@
+<%= form_for @curation, html: { class: "form-horizontal" } do |f| %>
+	<div class="form-group row">
+		<label for="curation_title" class="col-2 col-form-label">
+			<%= Curation.human_attribute_name :title %>
+		</label>
+		<div class="col-6">
+			<%= f.text_field :title, class: "form-control" %>
+		</div>
+	</div>
+	<div class="form-group row">
+		<div class="col-12">
+			<ul id="selected-stores">
+			</ul>
+		</div>
+	</div>
+	<div class="form-group row">
+		<div class="col-12">
+			<div style="height: 300px; border: 1px solid #ddd; border-radius: 4px; overflow: auto;">
+				<table id="curation-table" class="table table-striped">
+					<colgroup>
+						<col width="50px">
+						<col>
+					</colgroup>
+					<tbody>
+						<% Store.all.each do |s| %>
+						<tr>
+							<td><%= check_box_tag "curation[curation_stores_attributes][][store_id]", s.id, @store_ids.include?(s.id) %></td>
+							<td data-title><%= s.name %></td>
+						</tr>
+						<% end %>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="form-group row">
+		<div class="col-12 text-right">
+			<button type="submit" class="btn btn-primary"><%= t("btn.submit") %></button>
+			<%= link_to t("btn.cancel"), curations_path, class: "btn btn-danger" %>
+		</div>
+	</div>
+	
+<% end %>
