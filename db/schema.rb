@@ -10,13 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180222114416) do
+ActiveRecord::Schema.define(version: 20180222114713) do
 
   create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email",                       null: false
     t.string "password_digest",             null: false
     t.string "name",            limit: 100, null: false
     t.index ["email"], name: "index_admins_on_email", unique: true, using: :btree
+  end
+
+  create_table "curation_stores", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "curation_id",               null: false
+    t.integer  "store_id",                  null: false
+    t.integer  "display_order", default: 0
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.index ["curation_id"], name: "index_curation_stores_on_curation_id", using: :btree
+    t.index ["display_order"], name: "index_curation_stores_on_display_order", using: :btree
+    t.index ["store_id"], name: "index_curation_stores_on_store_id", using: :btree
   end
 
   create_table "curations", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -137,6 +148,8 @@ ActiveRecord::Schema.define(version: 20180222114416) do
     t.index ["phone_number"], name: "index_users_on_phone_number", using: :btree
   end
 
+  add_foreign_key "curation_stores", "curations"
+  add_foreign_key "curation_stores", "stores"
   add_foreign_key "happyhours", "stores"
   add_foreign_key "hash_tags", "stores"
   add_foreign_key "menu_images", "menus"
