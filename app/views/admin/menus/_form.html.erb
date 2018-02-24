@@ -38,7 +38,7 @@
 
   <div class="form-group text-right m-top-lg">
     <button type='submit' class="btn btn-primary"><%= t("btn.submit") %></button>
-    <%= link_to t("btn.cancel"), stores_path, class: "btn btn-danger" %>
+    <%= link_to t("btn.cancel"), store_path(@store), class: "btn btn-danger" %>
   </div>
 <% end %>
 <% content_for :javascript do %>

@@ -34,6 +34,8 @@ ko:
       show:
         set_to_holiday: "휴일로 지정"
     menus:
+      new:
+        title: "메뉴 등록"
       edit:
         title: "메뉴 수정"
     curations:

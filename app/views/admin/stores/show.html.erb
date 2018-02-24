@@ -3,7 +3,11 @@
 <% end %>
 
 <h3><%= Menu.model_name.human %></h3>
-<table class="table table-striped"> 
+
+<div class="text-right m-bottom">
+	<%= link_to t("btn.register"), new_store_menu_path(@store), class: "btn btn-primary" %>
+</div>
+<table class="table table-striped">
 	<thead>
 		<tr>
 			<th><%= Menu.human_attribute_name :name %></th>
@@ -52,7 +56,7 @@
 			<tr data-day-of-week="<%= i %>">
 				<td>
 					<%= name  %>
-					<button type="button" class="set-holiday btn btn-primary btn-sm m-left-sm"><%= t(".set_to_holiday") %></button>		
+					<button type="button" class="set-holiday btn btn-primary btn-sm m-left-sm"><%= t(".set_to_holiday") %></button>
 				</td>
 				<td class="td-form">
 					<div class="content">
