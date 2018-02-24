@@ -27,6 +27,8 @@ ko:
     stores:
       index:
         title: "식당 목록"
+      new:
+        title: "식당 등록"
       edit:
         title: "식당 수정"
       show:

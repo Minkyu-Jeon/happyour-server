@@ -1,6 +1,9 @@
 <% content_for :page_title do %>
 <h1><%= t(".title") %></h1>
 <% end %>
+<div class="text-right m-bottom">
+	<%= link_to t("btn.register"), new_store_path, class: "btn btn-primary" %>
+</div>
 <table class="table table-striped">
 	<thead>
 		<tr>

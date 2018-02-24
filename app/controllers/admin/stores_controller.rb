@@ -23,6 +23,18 @@ class Admin::StoresController < Admin::BaseController
     end
   end
 
+  def new
+    @store = Store.new
+  end
+
+  def create
+    if @store = Store.create(store_params)
+      redirect_to stores_path
+    else
+      render :new
+    end
+  end
+
   private
   def find_store
     @store = Store.includes(:menus, :happyhours).find(params[:id])
