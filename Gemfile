@@ -12,6 +12,8 @@ gem "bcrypt"
 gem 'rails-i18n'
 gem "faraday"
 gem 'carrierwave'
+gem 'mini_magick'
+gem 'fog-aws'
 gem 'active_model_serializers'
 gem 'mina'
 gem 'mina-unicorn', require: false
