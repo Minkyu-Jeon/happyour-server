@@ -14,6 +14,7 @@
 			<th><%= Menu.human_attribute_name :price %></th>
 			<th><%= Menu.human_attribute_name :discounted_price %></th>
 			<th><%= t('label.edit') %></th>
+			<th><%= t("label.destroy") %></th>
 		</tr>
 	</thead>
 	<tbody>
@@ -30,6 +31,11 @@
 				<td>
 					<%= link_to edit_store_menu_path(@store, m) do %>
 						<i class="fa fa-edit"></i>
+					<% end %>
+				</td>
+				<td>
+					<%= link_to store_menu_path(@store, m), method: :delete, data: { confirm: t("alert.confirm.destroy") } do %>
+						<i class="fa fa-remove"></i>
 					<% end %>
 				</td>
 			</tr>
@@ -75,5 +81,8 @@
 <% content_for :javascript do %>
 	<script type="text/javascript">
 		$("#happyour-table").happyourForm();
+		<% if alert.present? %>
+		alert("<%= alert %>");
+		<% end %>
 	</script>
 <% end %>

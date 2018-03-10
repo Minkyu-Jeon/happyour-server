@@ -30,6 +30,16 @@ class Admin::MenusController < Admin::BaseController
     end
 	end
 
+  def destroy
+    @store = Store.find(params[:store_id])
+    @menu = @store.menus.find(params[:id])
+    message = t(".fail")
+    if @menu.destroy
+      message = t(".success")
+    end
+    redirect_to store_path(@store), flash: { alert: message }
+  end
+
 	private
 	def menu_params
 		params.require(:menu).permit(:name, :price, :discounted_price, menu_images_attributes: [:id, :_destroy, :display_order, :image_cache])

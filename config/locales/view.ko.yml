@@ -38,6 +38,9 @@ ko:
         title: "메뉴 등록"
       edit:
         title: "메뉴 수정"
+      destroy:
+        success: "삭제되었습니다."
+        fail: "삭제 도중 오류가 발생했습니다."
     curations:
       index:
         title: "큐레이션"
@@ -47,3 +50,7 @@ ko:
     register: "등록"
   label:
     edit: "수정"
+    destroy: "삭제"
+  alert:
+    confirm:
+      destroy: "정말 삭제하시겠습니까?"

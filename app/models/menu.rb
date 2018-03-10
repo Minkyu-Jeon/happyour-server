@@ -1,5 +1,5 @@
 class Menu < ApplicationRecord
-	has_many :menu_images, inverse_of: :menu
+	has_many :menu_images, inverse_of: :menu, dependent: :destroy
 
 	belongs_to :store, inverse_of: :menus
 
