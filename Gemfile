@@ -14,6 +14,7 @@ gem "faraday"
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'fog-aws'
+gem 'ckeditor'
 gem 'active_model_serializers'
 gem 'mina'
 gem 'mina-unicorn', require: false
