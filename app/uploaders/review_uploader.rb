@@ -1,2 +1,2 @@
-class ReviewUploader < ApplicationUploader
+class ReviewUploader < S3Uploader
 end

@@ -1,2 +1,2 @@
-class StoreImageUploader < ApplicationUploader
+class StoreImageUploader < S3Uploader
 end

@@ -1,2 +1,2 @@
-class MenuImageUploader < ApplicationUploader
+class MenuImageUploader < S3Uploader
 end
