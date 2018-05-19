@@ -18,6 +18,7 @@ ko:
         users: "사용자 관리"
         stores: "식당 관리"
         curations: "큐레이션"
+        notices: 공지사항
     sessions:
       new:
         title: "로그인"
@@ -44,6 +45,23 @@ ko:
     curations:
       index:
         title: "큐레이션"
+    notices:
+      index:
+        title: 공지사항
+        confirm: 정말 삭제하시겠습니까?
+      new:
+        title: 공지사항 등록
+      edit:
+        title: 공지사항 수정
+      create:
+        success: 공지가 등록되었습니다.
+        fail: 입력 값을 확인해주세요.
+      update:
+        success: 공지가 수정되었습니다.
+        fail: 입력 값을 확인해주세요.
+      destroy:
+        success: 공지가 삭제되었습니다.
+        fail: 삭제 중 문제가 발생했습니다.
   btn:
     submit: "전송"
     cancel: "취소"

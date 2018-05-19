@@ -1,0 +1,53 @@
+<% content_for :page_title do %>
+<h1><%= t(".title") %></h1>
+<% end %>
+<div class="form-group text-right">
+  <%= link_to t("btn.register"), new_notice_path, class: "btn btn-primary" %>
+</div>
+<table class="table table-striped">
+  <colgroup>
+    <col width="80px">
+    <col>
+    <col width="120px">
+    <col width="80px">
+    <col width="80px">
+  </colgroup>
+  <thead>
+    <tr>
+      <th class="text-center"><%= Notice.human_attribute_name("id") %></th>
+      <th class="text-center"><%= Notice.human_attribute_name("title") %></th>
+      <th class="text-center"><%= Notice.human_attribute_name("created_at") %></th>
+      <th class="text-center"><%= t('label.edit') %></th>
+      <th class="text-center"><%= t('label.destroy') %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @notices.each do |n| %>
+      <tr>
+        <td><%= n.id %></td>
+        <td><%= link_to n.title, notice_path(n) %></td>
+        <td><%= l n.created_at %></td>
+        <td class="text-center">
+          <%= link_to edit_notice_path(n) do %>
+            <i class="fa fa-edit"></i>
+          <% end %>
+        </td>
+        <td class="text-center">
+          <%= link_to notice_path(n), method: :delete, data: { confirm: t(".confirm") } do %>
+            <i class="fa fa-remove"></i>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% content_for :javascript do %>
+<script type="text/javascript">
+  <% if flash[:success].present? %>
+  alert("<%= flash[:success] %>");
+  <% elsif flash[:fail].present? %>
+  alert("<%= flash[:fail] %>");
+  <% end %>
+</script>
+<% end %>

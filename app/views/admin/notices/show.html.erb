@@ -1,0 +1,12 @@
+<% content_for :page_title do %>
+<h1><%= @notice.title %></h1>
+<% end %>
+
+<div class="contents">
+  <%= @notice.content.html_safe %>
+</div>
+
+<div class="text-right">
+  <%= link_to t("label.edit"), edit_notice_path(@notice), class: "btn btn-primary" %>
+  <%= link_to t("btn.cancel"), notices_path, class: "btn btn-danger" %>
+</div>
