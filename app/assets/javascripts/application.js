@@ -16,4 +16,5 @@
 //= require bootstrap
 //= require dropzone
 //= require dropzone.locale.ko
+//= require ckeditor/init
 //= require_tree .

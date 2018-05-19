@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount Ckeditor::Engine => '/ckeditor'
   if Rails.application.secrets["server_mode"] == "api"
     namespace :v1 do
     	post 'login' => 'users#social_login' # 로그인
