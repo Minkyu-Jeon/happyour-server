@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       post 'reviews/:id/evaluate' => 'reviews#evaluate'
       get 'notices' => 'notices#index'
       get 'qnas' => 'qnas#index'
+      post 'qnas' => 'qnas#create'
     end
   elsif Rails.application.secrets["server_mode"] == "admin"
     scope module: :admin do
