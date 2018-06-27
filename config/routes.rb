@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       post 'stores/:store_id/reviews' => 'reviews#create' # 평가하기
       get 'stores/:store_id/reviews' => 'reviews#index'
       post 'reviews/:id/evaluate' => 'reviews#evaluate'
+      get 'notices' => 'notices#index'
     end
   elsif Rails.application.secrets["server_mode"] == "admin"
     scope module: :admin do
