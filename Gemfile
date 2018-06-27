@@ -21,3 +21,4 @@ gem 'mina-unicorn', require: false
 gem 'unicorn'
 gem 'listen'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'kaminari'

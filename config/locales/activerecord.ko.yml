@@ -7,6 +7,10 @@ ko:
       happyhour: "해피아워"
       menu_image: "메뉴 사진"
     attributes:
+      user:
+        id: ID
+        loginid: 로그인 아이디
+        social_type: 소셜 가입 경로
       store:
         name: "식당명"
         description: "설명"
@@ -42,6 +46,10 @@ ko:
         is_published:
           "true": "발행"
           "false": "미발행"
+      user:
+        social_type:
+          "1": 페이스북
+          "2": 네이버
 
 
 
