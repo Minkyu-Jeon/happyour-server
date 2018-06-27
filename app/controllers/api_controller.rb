@@ -1,6 +1,7 @@
 class ApiController < ApplicationController
 	rescue_from StandardError, with: :handle_error
 
+	before_action :authenticate_user_token!
 	attr_reader :current_user, :current_device
 
 	protected

@@ -1,4 +1,6 @@
 class V1::UsersController < ::ApiController
+	skip_before_action :authenticate_user_token!
+
 	def social_login
 		require_params! :social_type, :access_token
 		user = SigninForSocial.new.call(params[:social_type], params[:access_token])
